@@ -20,16 +20,14 @@ namespace dejamobile_takehome_bankapp.Service
         //add services here
         public enum ServicesEnum
         {
-            SerialPortManager,
             LogManager,
-            OmNrf51Wrapper,
-            HttpManager,
-            LiveObjectUplinkReader,
-            LiveObjectDownlinkSender
+            SdkManager,
+
         }
 
         //services
         private Logs.LogManager logManager { get; set; }
+        private Sdk.SdkManager sdkManager { get; set; }
 
         public ServiceManager(IEventAggregator eventAggregator)
         {
@@ -108,6 +106,11 @@ namespace dejamobile_takehome_bankapp.Service
                     logManager.start();
                     eventAggregator.GetEvent<Events.ServiceManagementEvent>().Publish(new ServiceManagementArg(ServiceManagementArg.Type.status, ServicesEnum.LogManager, null, true));
                     break;
+                case ServicesEnum.SdkManager:
+                    sdkManager = new Sdk.SdkManager(eventAggregator);
+                    sdkManager.start();
+                    eventAggregator.GetEvent<Events.ServiceManagementEvent>().Publish(new ServiceManagementArg(ServiceManagementArg.Type.status, ServicesEnum.SdkManager, null, true));
+                    break;
 
                 default:
                     break;
@@ -118,8 +121,7 @@ namespace dejamobile_takehome_bankapp.Service
         {
             //services to be started at boot
             startThisService(new ServiceManagementArg(ServiceManagementArg.Type.start, ServicesEnum.LogManager, null));
-            startThisService(new ServiceManagementArg(ServiceManagementArg.Type.start, ServicesEnum.LiveObjectUplinkReader, null));
-            startThisService(new ServiceManagementArg(ServiceManagementArg.Type.start, ServicesEnum.LiveObjectDownlinkSender, null));
+            startThisService(new ServiceManagementArg(ServiceManagementArg.Type.start, ServicesEnum.SdkManager, null));
         }
     }
 }

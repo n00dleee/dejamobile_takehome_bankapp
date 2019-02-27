@@ -12,5 +12,5 @@ namespace dejamobile_takehome_bankapp.Events
     public class ServiceManagementEvent : PubSubEvent<ServiceManagementArg> { }
     public class NotificationEvent : PubSubEvent<NotificationEventArgs> { }
     public class SdkCommandRequestEvent : PubSubEvent<SdkCommandRequestEventArgs> { }
-    public class SdkCommandResultEvent : PubSubEvent<SdkCommandRequestEvent> { }
+    public class SdkCommandResultEvent : PubSubEvent<dejamobile_takehome_sdk.TaskResult> { }
 }

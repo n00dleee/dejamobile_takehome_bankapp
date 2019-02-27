@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using dejamobile_takehome_sdk;
 
 namespace dejamobile_takehome_bankapp.ViewModels
 {
@@ -34,7 +35,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         //user creation
         private string _userCreationUserName ="";
-        public string _serCreationUserName
+        public string userCreationUserName
         {
             get { return _userCreationUserName; }
             set { SetProperty(ref _userCreationUserName, value); }
@@ -47,6 +48,20 @@ namespace dejamobile_takehome_bankapp.ViewModels
             set { SetProperty(ref _userCreationPassword, value); }
         }
 
+        private string _userCreationFirstName = "";
+        public string userCreationFirstName
+        {
+            get { return _userCreationFirstName; }
+            set { SetProperty(ref _userCreationFirstName, value); }
+        }
+
+        private string _userCreationLastName = "";
+        public string userCreationLastName
+        {
+            get { return _userCreationLastName; }
+            set { SetProperty(ref _userCreationLastName, value); }
+        }
+
         private string _userCreationPhone = "";
         public string userCreationPhone
         {
@@ -54,6 +69,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
             set { SetProperty(ref _userCreationPhone, value); }
         }
 
+        //Visibilities
         private Visibility _stackPanelLoginVisibility = Visibility.Visible;
         public Visibility stackPanelLoginVisibility
         {
@@ -105,19 +121,80 @@ namespace dejamobile_takehome_bankapp.ViewModels
             }
         }
 
-        public enum mode { login, creation, helper }
+        public enum mode { login, creation, helper,
+            loggedIn
+        }
 
         public DelegateCommand<string> onBtnClickLogin { get; set; }
         public DelegateCommand<string> onBtnClickGoToUserCreation { get; set; }
         public DelegateCommand<string> onBtnClickGoBackToLogin { get; set; }
+        public DelegateCommand<string> onBtnClickUserCreation { get; set; }
 
-        public ViewUserViewModel()
+        public ViewUserViewModel(IEventAggregator eventAggregator)
         {
+            this.eventAggregator = eventAggregator;
             currentMode = mode.login;
 
+            initSubcriptions();
             onBtnClickLogin = new DelegateCommand<string>(executeonBtnClickLogin, canExecuteonBtnClickLogin).ObservesProperty(() => userName).ObservesProperty(() => password);
             onBtnClickGoToUserCreation = new DelegateCommand<string>(executeonBtnClickGoToUserCreation, canExecuteonBtnClickGoToUserCreation);
             onBtnClickGoBackToLogin = new DelegateCommand<string>(executeonBtnClickGoBackToLogin, canExecuteonBtnClickGoBackToLogin);
+            onBtnClickUserCreation = new DelegateCommand<string>(executeonBtnClickUserCreation, canexecuteonBtnClickUserCreation).ObservesProperty(() => userCreationPassword).ObservesProperty(() => password);
+        }
+
+        private bool canexecuteonBtnClickUserCreation(string arg)
+        {
+            if (userCreationUserName.Count() > 0 && password.Count() > 7 && userCreationFirstName.Count() > 0  && userCreationLastName.Count() > 0) //password should be at least 8 chars
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private void executeonBtnClickUserCreation(string obj)
+        {
+            dejamobile_takehome_sdk.Models.UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userCreationUserName, userCreationPassword, userCreationFirstName, userCreationLastName, userCreationPhone);
+            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.createUser, user));
+        }
+
+        private void initSubcriptions()
+        {
+            eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Subscribe(onSdkCommandResultEvents);
+        }
+
+        private void onSdkCommandResultEvents(TaskResult obj)
+        {
+            switch (obj.name)
+            {
+                case TaskResult.TaskName.createUser:
+                    if(obj.result)
+                    {
+                        currentMode = mode.loggedIn;
+                    }
+                    else
+                    {
+
+                    }
+                    
+                    break;
+                case TaskResult.TaskName.logUser:
+                    if (!obj.result)
+                    {
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "Login failed :("));
+                        currentMode = mode.helper;
+                    }  
+                    else
+                    {
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "Login success !"));
+                        currentMode = mode.loggedIn;
+                    }
+                        
+                    
+                    break;
+                default:
+                    break;
+            }
         }
 
         private bool canExecuteonBtnClickLogin(string arg)
@@ -132,12 +209,13 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private void executeonBtnClickLogin(string obj)
         {
-            
+            dejamobile_takehome_sdk.Models.UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userName, password);
+            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.login, user));
         }
 
         private void executeonBtnClickGoToUserCreation(string obj)
         {
-            throw new NotImplementedException();
+            currentMode = mode.creation;
         }
 
         private bool canExecuteonBtnClickGoToUserCreation(string arg)
@@ -152,7 +230,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private void executeonBtnClickGoBackToLogin(string obj)
         {
-            throw new NotImplementedException();
+            currentMode = mode.login;
         }
     }
 }

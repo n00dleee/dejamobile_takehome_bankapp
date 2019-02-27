@@ -31,7 +31,23 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackPanelUserCreation" Visibility="{Binding stackPanelUserCreationVisibility}">
-                
+                <Image Width="128" Margin="30,30,30,10" Source="/dejamobile_takehome_bankapp;component/Icons/users128px.png"/>
+                <Label Content="User creation" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+                <Separator></Separator>
+                <Label Content="Username" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding userCreationUserName}"/>
+                <Label Content="First name" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding userCreationFirstName }" />
+                <Label Content="Last name" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding userCreationLastName}" />
+                <Label Content="Phone" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding userCreationPhone}" />
+                <Label Content="Password" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding userCreationPassword}" />
+
+                <Button Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding onBtnClickUserCreation}" CommandParameter="decode" Width="100">
+                    <Image Source="/dejamobile_takehome_bankapp;component/Icons/checked128px.png" Width="50"/>
+                </Button>
             </StackPanel>
 
 

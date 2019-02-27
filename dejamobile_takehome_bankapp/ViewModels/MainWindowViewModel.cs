@@ -67,7 +67,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 cfg.Dispatcher = Application.Current.Dispatcher;
 
                 cfg.DisplayOptions.TopMost = true;
-                cfg.DisplayOptions.Width = 250;
+                cfg.DisplayOptions.Width = 300;
             });
         }
 
