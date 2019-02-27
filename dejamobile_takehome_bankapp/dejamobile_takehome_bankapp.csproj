@@ -22,6 +22,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -42,14 +43,23 @@
     </ApplicationDefinition>
     <Compile Include="Events\CustomArgs.cs" />
     <Compile Include="Events\Events.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\Logs\LogManager.cs" />
     <Compile Include="Service\ServiceManager.cs" />
     <Compile Include="Service\ServiceTemplate.cs" />
     <Compile Include="ViewModels\ViewToolBarViewModel.cs" />
+    <Compile Include="ViewModels\ViewUserViewModel.cs" />
     <Compile Include="Views\ViewList.cs" />
     <Compile Include="Views\ViewToolBar.xaml.cs">
       <DependentUpon>ViewToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewUser.xaml.cs">
+      <DependentUpon>ViewUser.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -68,15 +78,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ViewUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -108,6 +117,36 @@
     <PackageReference Include="ToastNotifications.Messages">
       <Version>2.5.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\add128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\burgerMenu128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\creditCard128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\delete128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\multipleCreditCard128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\users128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\moneyBag128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\heart128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\checked128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\warning128px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -87,65 +87,6 @@ namespace dejamobile_takehome_bankapp.Views
             Console.WriteLine(DateTime.Now.ToString() + "UI/MainWindow.xaml -> " + s);
         }
 
-        private void buttonCloseNavBar_Click(object sender, RoutedEventArgs e)
-        {
-            onNavBarClosed();
-        }
-
-        private void buttonOpenNavBar_Click(object sender, RoutedEventArgs e)
-        {
-            onNavBarOpened();
-        }
-
-        private void manageNavBarTextBlocksState(bool state)
-        {
-            Visibility visibility = Visibility.Visible;
-
-            if (state)
-                visibility = Visibility.Visible;
-            else
-                visibility = Visibility.Collapsed;
-
-            foreach (TextBlock tb in navBarTextBlocksList)
-            {
-                tb.Visibility = visibility;
-            }
-        }
-
-        private void manageNavBarExpanderState(bool state)
-        {
-            //only collapse when 
-            foreach (Expander expd in navBarExpanderList)
-            {
-                if (state)
-                    expd.Visibility = Visibility.Visible;
-                else
-                    expd.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void onNavBarClosed()
-        {
-            navBarIsOpened = false;
-            buttonOpenNavBar.Visibility = Visibility.Visible;
-            buttonCloseNavBar.Visibility = Visibility.Collapsed;
-            imageBoxLogoOmwave.Visibility = Visibility.Collapsed;
-
-            manageNavBarTextBlocksState(false);
-            manageNavBarExpanderState(false);
-        }
-
-        private void onNavBarOpened()
-        {
-            navBarIsOpened = true;
-            buttonOpenNavBar.Visibility = Visibility.Collapsed;
-            buttonCloseNavBar.Visibility = Visibility.Visible;
-            imageBoxLogoOmwave.Visibility = Visibility.Visible;
-
-            manageNavBarTextBlocksState(true);
-            manageNavBarExpanderState(true);
-        }
-
         /*
         private void listViewItemTests_GotFocus(object sender, RoutedEventArgs e)
         {

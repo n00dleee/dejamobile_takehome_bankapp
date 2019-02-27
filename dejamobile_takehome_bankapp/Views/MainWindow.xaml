@@ -83,40 +83,27 @@
         </Style>
     </Controls:MetroWindow.Resources>
 
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonOpenNavBar">
-            <BeginStoryboard Storyboard="{StaticResource navMenuOpen}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonCloseNavBar">
-            <BeginStoryboard Storyboard="{StaticResource navMenuClose}"/>
-        </EventTrigger>
-    </Window.Triggers>
-
     <DockPanel>
         <Grid DockPanel.Dock="Left" x:Name="gridNavigationMenu" Width="200" HorizontalAlignment="Left" Background="#1E282C">
             <StackPanel>
-                <Grid Height="50" Background="White">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Image x:Name="imageBoxLogoOmwave"  Width="150"/>
-                        <Button x:Name="buttonOpenNavBar" Visibility="Collapsed" Width="28"  Background="White" HorizontalAlignment="Right" VerticalAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonOpenNavBar_Click" >
-                            <Image />
-                        </Button>
-                        <Button x:Name="buttonCloseNavBar" Visibility="Visible" Width="28" Margin="2" Background="White" HorizontalAlignment="Right" VerticalAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonCloseNavBar_Click" >
-                            <Image />
-                        </Button>
+                <Grid Height="50"  Background="White">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Image Source="/dejamobile_takehome_bankapp;component/Icons/heart128px.png"/>
+                        <Image  Source="/dejamobile_takehome_bankapp;component/Icons/moneyBag128px.png"/>
+                        <TextBlock Text="We love money bank" VerticalAlignment="Center"/>
                     </StackPanel>
 
                 </Grid>
                 <ListView x:Name="ListViewNavBar" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" OpacityMask="#BF808080">
                     <ListViewItem x:Name="listViewItemUser" Height="50"  Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" GotFocus="listViewItemUser_GotFocus" >
                         <StackPanel Orientation="Horizontal">
-                            <Image  Style="{StaticResource styleNavBarIconMenu}" />
+                            <Image  Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/users128px.png"/>
                             <TextBlock Text="USER" Style="{StaticResource styleNavBarTextBlockMenu}"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="listViewItemCards"  Height="50" Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="Black" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" GotFocus="listViewItemCards_GotFocus" >
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Image x:Name="imageSettings"  Style="{StaticResource styleNavBarIconMenu}" />
+                            <Image x:Name="imageSettings"  Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/multipleCreditCard128px.png" />
                             <TextBlock Text="CARDS"  Style="{StaticResource styleNavBarTextBlockMenu}"/>
                         </StackPanel>
                     </ListViewItem>
@@ -140,10 +127,9 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <!-- <Views:ViewIoToolBar/>-->
+            <views:ViewToolBar/>
             <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion"/>
         </Grid>
-
     </DockPanel>
 </Controls:MetroWindow>
 

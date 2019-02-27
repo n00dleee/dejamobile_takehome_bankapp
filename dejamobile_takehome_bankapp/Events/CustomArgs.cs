@@ -62,5 +62,17 @@ namespace dejamobile_takehome_bankapp.Events
         }
     }
 
+    public class SdkCommandRequestEventArgs
+    {
+        public enum CommandType { createUser, login, addCard, getCards, deleteCard, getStats }
 
+        public CommandType commandType { get; set; }
+        public Object payload { get; set; }
+        
+        public SdkCommandRequestEventArgs(CommandType commandType, Object payload = null)
+        {
+            this.commandType = commandType;
+            this.payload = payload;
+        }
+    }
 }

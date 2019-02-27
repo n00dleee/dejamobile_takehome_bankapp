@@ -17,7 +17,8 @@ namespace dejamobile_takehome_bankapp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<MainWindow>(ViewList.mainWindow);
+            containerRegistry.RegisterForNavigation<ViewUser>(ViewList.userView);
         }
     }
 }
