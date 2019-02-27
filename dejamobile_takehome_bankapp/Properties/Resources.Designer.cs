@@ -93,6 +93,16 @@ namespace dejamobile_takehome_bankapp.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap crediCardBackgroud {
+            get {
+                object obj = ResourceManager.GetObject("crediCardBackgroud", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap creditCard128px {
             get {
                 object obj = ResourceManager.GetObject("creditCard128px", resourceCulture);
@@ -146,6 +156,16 @@ namespace dejamobile_takehome_bankapp.Properties {
         internal static System.Drawing.Bitmap users128px {
             get {
                 object obj = ResourceManager.GetObject("users128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap visaLogo {
+            get {
+                object obj = ResourceManager.GetObject("visaLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
