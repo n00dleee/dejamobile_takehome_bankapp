@@ -91,6 +91,15 @@ namespace dejamobile_takehome_bankapp.ViewModels
             set { SetProperty(ref _stackPanelUserHelperVisibility, value); }
         }
 
+        private Visibility _stackPanelLoggedUserVisibility = Visibility.Collapsed;
+        public Visibility stackPanelLoggedUserVisibility
+        {
+            get { return _stackPanelLoggedUserVisibility; }
+            set { SetProperty(ref _stackPanelLoggedUserVisibility, value); }
+        }
+
+        
+
         private mode _currentMode;
         public mode currentMode
         {
@@ -107,16 +116,25 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     stackPanelLoginVisibility = Visibility.Visible;
                     stackPanelUserCreationVisibility = Visibility.Collapsed;
                     stackPanelUserHelperVisibility = Visibility.Collapsed;
+                    stackPanelLoggedUserVisibility = Visibility.Collapsed;
                     break;
                 case mode.creation:
                     stackPanelLoginVisibility = Visibility.Collapsed;
                     stackPanelUserHelperVisibility = Visibility.Collapsed;
                     stackPanelUserCreationVisibility = Visibility.Visible;
+                    stackPanelLoggedUserVisibility = Visibility.Collapsed;
                     break;
                 case mode.helper:
                     stackPanelLoginVisibility = Visibility.Collapsed;
                     stackPanelUserHelperVisibility = Visibility.Visible;
                     stackPanelUserCreationVisibility = Visibility.Collapsed;
+                    stackPanelLoggedUserVisibility = Visibility.Collapsed;
+                    break;
+                case mode.loggedIn:
+                    stackPanelLoginVisibility = Visibility.Collapsed;
+                    stackPanelUserHelperVisibility = Visibility.Collapsed;
+                    stackPanelUserCreationVisibility = Visibility.Collapsed;
+                    stackPanelLoggedUserVisibility = Visibility.Visible;
                     break;
             }
         }
@@ -170,27 +188,27 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 case TaskResult.TaskName.createUser:
                     if(obj.result)
                     {
-                        currentMode = mode.loggedIn;
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "User successfully created !"));
+                        currentMode = mode.login;
                     }
                     else
                     {
-
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "User creation failed :("));
+                        currentMode = mode.creation;
                     }
                     
                     break;
                 case TaskResult.TaskName.logUser:
-                    if (!obj.result)
-                    {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "Login failed :("));
-                        currentMode = mode.helper;
-                    }  
-                    else
+                    if (obj.result)
                     {
                         eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "Login success !"));
                         currentMode = mode.loggedIn;
-                    }
-                        
-                    
+                    }  
+                    else
+                    {
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "Login failed :("));
+                        currentMode = mode.helper;
+                    } 
                     break;
                 default:
                     break;
