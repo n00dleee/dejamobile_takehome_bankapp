@@ -38,8 +38,12 @@ namespace dejamobile_takehome_bankapp.Service.Sdk
                     eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
                 case SdkCommandRequestEventArgs.CommandType.addCard:
+                    taskResult = await sdk.AddCard((dejamobile_takehome_sdk.Models.CardModel)arg.payload);
+                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
                 case SdkCommandRequestEventArgs.CommandType.getCards:
+                    taskResult = sdk.getDigitizedCardsList();
+                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
                 case SdkCommandRequestEventArgs.CommandType.deleteCard:
                     break;

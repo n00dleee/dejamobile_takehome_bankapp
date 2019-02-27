@@ -139,8 +139,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
             }
         }
 
-        public enum mode { login, creation, helper,
-            loggedIn
+        public enum mode { login, creation, helper, loggedIn
         }
 
         public DelegateCommand<string> onBtnClickLogin { get; set; }

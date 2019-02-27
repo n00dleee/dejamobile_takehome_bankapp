@@ -5,13 +5,51 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Border Background="#1E282C" Height="auto" Width="400" CornerRadius="30" >
         <StackPanel Margin="20">
-            <StackPanel x:Name="stackPanelUserLogin" Visibility="{Binding stackPanelLoginVisibility}">
-                <Image Width="128" Margin="30,30,30,10" Source="/dejamobile_takehome_bankapp;component/Icons/multipleCreditCard128px.png"/>
-                <Label Content="Manage your virtual cards" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
-                <Separator></Separator>
-                
+            <Image Width="128" Margin="30,30,30,10" Source="/dejamobile_takehome_bankapp;component/Icons/multipleCreditCard128px.png"/>
+            <Label Content="Manage your virtual cards" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+            <Separator></Separator>
+            
+            <StackPanel x:Name="stackPanelAddCardButton" Visibility="{Binding stackPanelAddCardButtonVisibility}">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickAddCard}">
+                    <StackPanel>
+                        <Image Source="/dejamobile_takehome_bankapp;component/Icons/add128px.png" Width="64" />
+                        <Label Content="Add a card" Foreground="White" HorizontalAlignment="Center" FontSize="15"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelCardCreation" Visibility="{Binding stackPanelCardCreationVisibility}">
+                <Label Content="Owner name" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding cardCreationOwnerName}"/>
+                <Label Content="Card number" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding cardCreationCardNumber}"/>
+                <Label Content="Expiration date" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding cardCreationExpDate}"/>
+                <Label Content="CVV" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBox Text="{Binding cardCreationCrypto}"/>
+                <StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Center">
+                    <Button Background="{x:Null}" Command="{Binding onBtnClickValidateCardCreation}" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="100">
+                        <Image Source="/dejamobile_takehome_bankapp;component/Icons/checked128px.png" Width="40" />
+                    </Button>
+                    <Button Background="{x:Null}" Command="{Binding onBtnClickCancelCardCreation}" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="100">
+                        <Image Source="/dejamobile_takehome_bankapp;component/Icons/delete128px.png" Width="40" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelCardDisplay" Visibility="{Binding stackPanelCardsDisplayVisibility}" >
+                <ListBox x:Name="listBoxCardsDisplay" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch">
+                    <ListBox.Resources>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                            </Style.Resources>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
             </StackPanel>
         </StackPanel>
-
     </Border>
 </UserControl>

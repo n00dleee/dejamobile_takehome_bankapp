@@ -175,7 +175,7 @@
     <Resource Include="Icons\visaLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Icons\crediCardBackgroud.jpg" />
+    <Resource Include="Icons\crediCardBackgroud.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
