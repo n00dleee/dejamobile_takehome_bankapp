@@ -3,17 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Border Height="200" Width="350" CornerRadius="15">
+    <Border Height="180" Width="320" CornerRadius="15">
         <Border.Background>
             <ImageBrush ImageSource="/dejamobile_takehome_bankapp;component/Icons/crediCardBackgroud.jpg"/>
         </Border.Background>
         <Canvas>
-            <Image Source="/dejamobile_takehome_bankapp;component/Icons/moneyBag128px.png" Width="59" Canvas.Left="65" Canvas.Top="10" Height="53" RenderTransformOrigin="0.864,0.509"/>
-            <Image Source="/dejamobile_takehome_bankapp;component/Icons/heart128px.png" Width="50" Canvas.Left="10" Canvas.Top="10" Height="53"/>
-            <Image Source="/dejamobile_takehome_bankapp;component/Icons/visaLogo.png" Width="80" Canvas.Left="260" Canvas.Top="162"/>
-            <Label x:Name="expDate" Content="00/00" Foreground="Black" Canvas.Left="204" FontSize="15" FontWeight="Bold" Canvas.Top="132"/>
-            <Label x:Name="ownerName" Content="Owner Name" Foreground="Black" Canvas.Left="28" Canvas.Top="153" FontSize="20" FontWeight="Bold" Width="227"/>
-            <Label x:Name="cardNumber" Content="0000 0000 0000 0000" Foreground="Black" Canvas.Left="28" Canvas.Top="95" FontSize="20" FontWeight="Bold" Width="227"/>
+            <Image Source="/dejamobile_takehome_bankapp;component/Icons/moneyBag128px.png" Width="59" Canvas.Left="68" Canvas.Top="10" Height="53" RenderTransformOrigin="0.864,0.509"/>
+            <Image Source="/dejamobile_takehome_bankapp;component/Icons/heart128px.png" Width="50" Canvas.Left="13" Canvas.Top="10" Height="53"/>
+            <Image Source="/dejamobile_takehome_bankapp;component/Icons/visaLogo.png" Width="80" Canvas.Left="230" Canvas.Top="144"/>
+            <Label x:Name="expDate" Content="00/00" Foreground="Black" Canvas.Left="186" FontSize="15" FontWeight="Bold" Canvas.Top="114"/>
+            <Label x:Name="ownerName" Content="Owner Name" Foreground="Black" Canvas.Left="10" Canvas.Top="135" FontSize="20" FontWeight="Bold" Width="227"/>
+            <Label x:Name="cardNumber" Content="0000 0000 0000 0000" Foreground="Black" Canvas.Left="29" Canvas.Top="82" FontSize="20" FontWeight="Bold" Width="227"/>
         </Canvas>
     </Border>
 </UserControl>
