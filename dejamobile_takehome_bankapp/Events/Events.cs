@@ -19,4 +19,5 @@ namespace dejamobile_takehome_bankapp.Events
     public class BankTransactionEvent : PubSubEvent<BankTransactionArgs> { }
     public class BankApprovalEvent : PubSubEvent<BankTransactionArgs> { }
     public class BankManagementEvent : PubSubEvent<BankManagementArgs> { }
+    public class BankReceiptEvent : PubSubEvent<Service.Mocks.AccountDisplayableInfo> { }
 }

@@ -210,7 +210,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     if (obj.result)
                     {
                         eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.success, "Cards refreshed !"));
-                        cardList = (List<dejamobile_takehome_sdk.Models.CardModel>)obj.payload;
+                        cardList = (List<CardModel>)obj.payload;
                     }
                     else
                     {
@@ -225,7 +225,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
                         currentMode = mode.display;
 
                         //notify bank a digitized card has been added
-                        eventAggregator.GetEvent<Events.BankManagementEvent>().Publish(new Events.BankManagementArgs(loggedUser, currentOriginalCard, (dejamobile_takehome_sdk.Models.CardModel)obj.payload));
+                        eventAggregator.GetEvent<Events.BankManagementEvent>().Publish(new Events.BankManagementArgs(Events.BankManagementArgs.EventType.addDigitizedCard, loggedUser, (CardModel)obj.payload, currentOriginalCard));
 
                         //refresh card list !
                         eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));

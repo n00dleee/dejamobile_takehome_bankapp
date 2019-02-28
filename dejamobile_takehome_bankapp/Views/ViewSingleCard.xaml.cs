@@ -19,7 +19,7 @@ namespace dejamobile_takehome_bankapp.Views
         private string reformatCardNumber(string cardNumber)
         {
             string first4Digits = cardNumber.Substring(0, 4);
-            string last4Digits = cardNumber.Substring(cardNumber.Length - 5, 4);
+            string last4Digits = cardNumber.Substring(cardNumber.Length - 4, 4);
 
             string reformattedNumber = first4Digits + " **** **** " + last4Digits;
             return reformattedNumber;

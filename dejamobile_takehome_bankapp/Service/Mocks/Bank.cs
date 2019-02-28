@@ -51,11 +51,25 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
                 case BankManagementArgs.EventType.removeDigitizedCard:
                     //remove account
                     deleteDigitizedCardFromAccount(obj.digitizedCard);
-
+                    break;
+                case BankManagementArgs.EventType.getHistory:
+                    eventAggregator.GetEvent<Events.BankReceiptEvent>().Publish(getAccountInfoForThisCard(obj.digitizedCard));
                     break;
                 default:
                     break;
             }
+        }
+
+        private AccountDisplayableInfo getAccountInfoForThisCard(CardModel digitizedCard)
+        {
+            foreach(BankAccount account in accounts)
+            {
+                if (account.paymentInformation.digitizedCardCopy == digitizedCard)
+                {
+                    return account.accountInfo;
+                }
+            }
+            return null;
         }
 
         private void deleteDigitizedCardFromAccount(CardModel digitizedCard)
@@ -74,7 +88,7 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
             switch (obj.orderStatus)
             {
                 case BankTransactionArgs.OrderStatus.pendingForApproval:
-                    bool result = processPaymentRequest(obj.paymentInformation, obj.transactionAmount);
+                    bool result = processPaymentRequest(obj.paymentInformation, obj.transactionAmount, obj.orderName);
                     if (result)
                     {
                         obj.orderStatus = BankTransactionArgs.OrderStatus.approved;
@@ -90,7 +104,7 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
             }
         }
 
-        private bool processPaymentRequest(CardModel digitizedCard, int transactionAmount)
+        private bool processPaymentRequest(CardModel digitizedCard, int transactionAmount, string transactionName)
         {
             foreach(BankAccount account in accounts)
             {
@@ -98,10 +112,10 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
                 if(account.paymentInformation.digitizedCardCopy == digitizedCard)
                 {
                     //check if account has enough funds for the transaction
-                    if (account.amounfOfCash >= transactionAmount)
+                    if (account.accountInfo.amounfOfCash >= transactionAmount)
                     {
-                        //remove money from account
-                        account.amounfOfCash -= transactionAmount;
+                        //remove money from account and store transaction
+                        account.accountInfo.processTransaction(transactionAmount, transactionName);
                         return true;
                     }
                     else
@@ -113,10 +127,11 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
 
         public override void unsubscribe()
         {
-            throw new NotImplementedException();
+            eventAggregator.GetEvent<Events.BankTransactionEvent>().Unsubscribe(onBankTransactionEvents);
+            eventAggregator.GetEvent<Events.BankManagementEvent>().Unsubscribe(onBankManagementEvents);
         }
 
-        private BankAccount createNewAccount(dejamobile_takehome_sdk.Models.UserModel user, dejamobile_takehome_sdk.Models.CardModel originalCard, dejamobile_takehome_sdk.Models.CardModel digitizedCard, int amoutOfCash)
+        private BankAccount createNewAccount(UserModel user, CardModel originalCard, CardModel digitizedCard, int amoutOfCash)
         {
             BankAccount newAccount = new BankAccount(user, new PaymentInformation(originalCard, digitizedCard), amoutOfCash);
             accounts.Add(newAccount);
@@ -127,28 +142,62 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
 
     public class BankAccount
     {
-        public dejamobile_takehome_sdk.Models.UserModel user { get; set; }
+        public UserModel user { get; set; }
         public PaymentInformation paymentInformation { get; set; }
-        public int amounfOfCash { get; set; }
+        public AccountDisplayableInfo accountInfo { get; set; }
 
-        public BankAccount(dejamobile_takehome_sdk.Models.UserModel user, PaymentInformation paymentInformation, int amountOfCash = 5000)
+        public BankAccount(UserModel user, PaymentInformation paymentInformation, int amountOfCash = 5000)
         {
             this.paymentInformation = paymentInformation;
-            this.amounfOfCash = amountOfCash;
+            this.accountInfo = new AccountDisplayableInfo(amountOfCash);
             this.user = user;
         }
     }
 
     public class PaymentInformation
     {
-        public dejamobile_takehome_sdk.Models.CardModel originalCard { get; set; }
-        public dejamobile_takehome_sdk.Models.CardModel digitizedCardCopy { get; set; }
+        public CardModel originalCard { get; set; }
+        public CardModel digitizedCardCopy { get; set; }
 
-        public PaymentInformation(dejamobile_takehome_sdk.Models.CardModel originalCard, dejamobile_takehome_sdk.Models.CardModel digitizedCardCopy)
+        public PaymentInformation(CardModel originalCard, CardModel digitizedCardCopy)
         {
             this.originalCard = originalCard;
             this.digitizedCardCopy = digitizedCardCopy;
         }
 
+    }
+
+    public class AccountDisplayableInfo
+    {
+        public int amounfOfCash { get; set; }
+        public List<Transaction> transactionHistory { get; set; }
+
+        public AccountDisplayableInfo(int amountOfCash)
+        {
+            this.amounfOfCash = amountOfCash;
+            this.transactionHistory = new List<Transaction>();
+        }
+
+        public void processTransaction(int amount, string transactionName)
+        {
+            this.amounfOfCash -= amount;
+            this.transactionHistory.Add(new Transaction(transactionName, DateTime.Now, amount, amounfOfCash));
+        }
+    }
+
+    public class Transaction
+    {
+        public string name { get; set; }
+        public DateTime date { get; set; }
+        public int amount { get; set; }
+        public int remainingBalance {get;set; }
+
+        public Transaction(string name, DateTime date, int amount, int remainingBalance)
+        {
+            this.name = name;
+            this.date = date;
+            this.amount = amount;
+            this.remainingBalance = remainingBalance;
+        }
     }
 }

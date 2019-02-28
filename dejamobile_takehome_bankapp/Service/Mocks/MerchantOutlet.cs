@@ -104,7 +104,7 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
             itemInShop item = getItemFromId(obj.itemPurchasedId);
             if (item.price > 0)
             {
-                sendPaymentRequestToBankService(item.price, obj.paymentInformation, item.name + " " + DateTime.Now.ToString());
+                sendPaymentRequestToBankService(item.price, obj.paymentInformation, item.name);
             }
         }
 

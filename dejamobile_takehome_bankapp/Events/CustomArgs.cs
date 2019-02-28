@@ -111,16 +111,17 @@ namespace dejamobile_takehome_bankapp.Events
 
     public class BankManagementArgs
     {
-        public enum EventType { addDigitizedCard, removeDigitizedCard }
+        public enum EventType { addDigitizedCard, removeDigitizedCard, getHistory }
 
         public EventType eventType;
         public dejamobile_takehome_sdk.Models.UserModel userConcerned;
         public dejamobile_takehome_sdk.Models.CardModel originalCard;
         public dejamobile_takehome_sdk.Models.CardModel digitizedCard;
 
-        public BankManagementArgs(dejamobile_takehome_sdk.Models.UserModel userConcerned, dejamobile_takehome_sdk.Models.CardModel originalCard, dejamobile_takehome_sdk.Models.CardModel digitizedCard)
+        public BankManagementArgs(EventType eventType ,dejamobile_takehome_sdk.Models.UserModel user, dejamobile_takehome_sdk.Models.CardModel digitizedCard, dejamobile_takehome_sdk.Models.CardModel originalCard = null)
         {
-            this.userConcerned = userConcerned;
+            this.eventType = eventType;
+            this.userConcerned = user;
             this.originalCard = originalCard;
             this.digitizedCard = digitizedCard;
         }
