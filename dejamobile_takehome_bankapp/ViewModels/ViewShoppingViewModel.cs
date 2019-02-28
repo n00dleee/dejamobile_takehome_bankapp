@@ -92,19 +92,19 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
             switch (obj)
             {
-                case "groceries": //50€
+                case "groceries":
                     eventAggregator.GetEvent<Events.MerchantOrderEvent>().Publish(new Events.MerchantOrderArgs(card, 1));
                     eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.information, "Your order has been placed..."));
                     break;
-                case "gpu": //1999€
+                case "gpu":
                     eventAggregator.GetEvent<Events.MerchantOrderEvent>().Publish(new Events.MerchantOrderArgs(card, 2));
                     eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.information, "Your order has been placed..."));
                     break;
-                case "smartphone": //2399€
+                case "smartphone":
                     eventAggregator.GetEvent<Events.MerchantOrderEvent>().Publish(new Events.MerchantOrderArgs( card, 3));
                     eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.information, "Your order has been placed..."));
                     break;
-                case "coffee": //9€
+                case "coffee":
                     eventAggregator.GetEvent<Events.MerchantOrderEvent>().Publish(new Events.MerchantOrderArgs( card, 4));
                     eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.information, "Your order has been placed..."));
                     break;
