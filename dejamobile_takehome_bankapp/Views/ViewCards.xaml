@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Border Background="#1E282C" Height="auto" Width="400" CornerRadius="30" >
+    <Border Background="#1E282C" Height="820" Width="400" CornerRadius="30" >
         <StackPanel Margin="20">
             <Image Width="128" Margin="30,30,30,10" Source="/dejamobile_takehome_bankapp;component/Icons/multipleCreditCard128px.png"/>
             <Label Content="Manage your virtual cards" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
@@ -38,7 +38,7 @@
             </StackPanel>
 
             <StackPanel x:Name="stackPanelCardDisplay" Visibility="{Binding stackPanelCardsDisplayVisibility}" >
-                <ListBox x:Name="listBoxCardsDisplay" SelectedItem="{Binding listBoxDisplayCardSelectedItem}" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible">>
+                <ListBox x:Name="listBoxCardsDisplay" MaxHeight="370" SelectedItem="{Binding listBoxDisplayCardSelectedItem}" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible">>
                     <ListBox.Resources>
                         <Style TargetType="ListBoxItem">
                             <Style.Resources>
