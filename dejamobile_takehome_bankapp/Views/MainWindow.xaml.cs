@@ -87,16 +87,9 @@ namespace dejamobile_takehome_bankapp.Views
             Console.WriteLine(DateTime.Now.ToString() + "UI/MainWindow.xaml -> " + s);
         }
 
-        /*
-        private void listViewItemTests_GotFocus(object sender, RoutedEventArgs e)
-        {
-            //eventAggregator.GetEvent<Events.NavigateToEvent>().Publish(Views.scenariiManagementView);
-        }
-        */
-
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
+            eventAggregator.GetEvent<Events.NavigateToEvent>().Publish(ViewList.userView);
         }
 
         private void listViewItemUser_GotFocus(object sender, RoutedEventArgs e)

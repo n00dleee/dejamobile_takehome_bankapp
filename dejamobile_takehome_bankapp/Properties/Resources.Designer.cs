@@ -163,6 +163,16 @@ namespace dejamobile_takehome_bankapp.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap refresh128px {
+            get {
+                object obj = ResourceManager.GetObject("refresh128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap users128px {
             get {
                 object obj = ResourceManager.GetObject("users128px", resourceCulture);

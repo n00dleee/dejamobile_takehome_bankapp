@@ -172,6 +172,20 @@ namespace dejamobile_takehome_bankapp.ViewModels
         private void initSubscriptions()
         {
             eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Subscribe(onSdkCommandResultEvents);
+            eventAggregator.GetEvent<Events.NavigateToEvent>().Subscribe(onNavigateEvents);
+        }
+
+
+        private void onNavigateEvents(string obj)
+        {
+            switch (obj)
+            {
+                case "ViewCards": // cannot switch on Views.ViewList.cardsView as it is not considered constant. Cannot set this as const AND static at the same time :(
+                    eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.getCards));
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void onSdkCommandResultEvents(TaskResult obj)
