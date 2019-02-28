@@ -174,7 +174,8 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     }
                     else
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "Cards refresh failed :("));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "Cards refresh failed :("));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.warning, "Please ensure to be logged in !"));
                     }                    
                     break;
                 case TaskResult.TaskName.addCard:

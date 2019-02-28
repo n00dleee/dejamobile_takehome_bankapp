@@ -38,7 +38,7 @@
             </StackPanel>
 
             <StackPanel x:Name="stackPanelCardDisplay" Visibility="{Binding stackPanelCardsDisplayVisibility}" >
-                <ListBox x:Name="listBoxCardsDisplay" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch">
+                <ListBox x:Name="listBoxCardsDisplay" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible">>
                     <ListBox.Resources>
                         <Style TargetType="ListBoxItem">
                             <Style.Resources>

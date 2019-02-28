@@ -58,7 +58,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     parentWindow: Application.Current.MainWindow,
                     corner: Corner.BottomRight,
                     offsetX: 25,
-                    offsetY: 100);
+                    offsetY: 75);
 
                 cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
                     notificationLifetime: TimeSpan.FromSeconds(2),
@@ -67,7 +67,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 cfg.Dispatcher = Application.Current.Dispatcher;
 
                 cfg.DisplayOptions.TopMost = true;
-                cfg.DisplayOptions.Width = 300;
+                cfg.DisplayOptions.Width = 250;
             });
         }
 
