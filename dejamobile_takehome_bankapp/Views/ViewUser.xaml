@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    
-    <Border Background="#1E282C" Height="auto" Width="400" CornerRadius="30" >
+
+    <Border Background="#1E282C" Height="820" Width="400" CornerRadius="30" >
         <StackPanel Margin="20">
             <StackPanel x:Name="stackPanelUserLogin" Visibility="{Binding stackPanelLoginVisibility}">
                 <Image Width="128" Margin="30,30,30,10" Source="/dejamobile_takehome_bankapp;component/Icons/users128px.png"/>

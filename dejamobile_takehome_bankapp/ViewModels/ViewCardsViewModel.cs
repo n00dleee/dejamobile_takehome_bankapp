@@ -23,6 +23,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
         public DelegateCommand<string> onBtnClickAddCard { get; set; }
         public DelegateCommand<string> onBtnClickValidateCardCreation { set; get; }
         public DelegateCommand<string> onBtnClickCancelCardCreation { set; get; }
+        public DelegateCommand<string> onBtnClickCardNumberAutoFill { get; set; }
 
         private string _cardCreationOwnerName= "";
         public string cardCreationOwnerName
@@ -116,9 +117,20 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 ObservesProperty(() => cardCreationExpDate).
                 ObservesProperty(() => cardCreationCrypto);
             onBtnClickCancelCardCreation = new DelegateCommand<string>(executeonBtnClickCancelCardCreation, canExecuteonBtnClickCancelCardCreation);
+            onBtnClickCardNumberAutoFill = new DelegateCommand<string>(executeonBtnClickCardNumberAutoFill, canExecuteonBtnClickCardNumberAutoFill);
 
             //refresh cards
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.getCards));
+        }
+
+        private bool canExecuteonBtnClickCardNumberAutoFill(string arg)
+        {
+            return true;
+        }
+
+        private void executeonBtnClickCardNumberAutoFill(string obj)
+        {
+            cardCreationCardNumber = "4556848510974654";
         }
 
         private bool canExecuteonBtnClickCancelCardCreation(string arg)

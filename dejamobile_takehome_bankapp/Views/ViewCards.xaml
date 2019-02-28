@@ -22,7 +22,18 @@
                 <Label Content="Owner name" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
                 <TextBox Text="{Binding cardCreationOwnerName}"/>
                 <Label Content="Card number" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding cardCreationCardNumber}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Text="{Binding cardCreationCardNumber}" Margin="0,0,10,0"/>
+                    <Button Grid.Column="1" Background="White" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickCardNumberAutoFill}" >
+                        <Image Source="/dejamobile_takehome_bankapp;component/Icons/magicWand128px.png" />
+                    </Button>
+                </Grid>
+                
+
                 <Label Content="Expiration date" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
                 <TextBox Text="{Binding cardCreationExpDate}"/>
                 <Label Content="CVV" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>

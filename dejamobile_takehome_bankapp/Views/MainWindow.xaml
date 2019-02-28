@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:dejamobile_takehome_bankapp.Views"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="{Binding Title}" Height="900" Width="960" Icon="/dejamobile_takehome_bankapp;component/Icons/moneyBag128px.png">
+        Title="{Binding Title}" Height="1000" Width="960" Icon="/dejamobile_takehome_bankapp;component/Icons/moneyBag128px.png">
 
     <Controls:MetroWindow.Resources>
         <Storyboard x:Key="navMenuOpen">
