@@ -83,9 +83,39 @@ namespace dejamobile_takehome_bankapp.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap buy128px {
+            get {
+                object obj = ResourceManager.GetObject("buy128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cart128px {
+            get {
+                object obj = ResourceManager.GetObject("cart128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap checked128px {
             get {
                 object obj = ResourceManager.GetObject("checked128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap coffee128px {
+            get {
+                object obj = ResourceManager.GetObject("coffee128px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +146,26 @@ namespace dejamobile_takehome_bankapp.Properties {
         internal static System.Drawing.Bitmap delete128px {
             get {
                 object obj = ResourceManager.GetObject("delete128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gpu128px {
+            get {
+                object obj = ResourceManager.GetObject("gpu128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap groceries128px {
+            get {
+                object obj = ResourceManager.GetObject("groceries128px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +213,39 @@ namespace dejamobile_takehome_bankapp.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap payment128px {
+            get {
+                object obj = ResourceManager.GetObject("payment128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap receipt128px {
+            get {
+                object obj = ResourceManager.GetObject("receipt128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh128px {
             get {
                 object obj = ResourceManager.GetObject("refresh128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap smartphone128px {
+            get {
+                object obj = ResourceManager.GetObject("smartphone128px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +266,16 @@ namespace dejamobile_takehome_bankapp.Properties {
         internal static System.Drawing.Bitmap visaLogo {
             get {
                 object obj = ResourceManager.GetObject("visaLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wallet128px {
+            get {
+                object obj = ResourceManager.GetObject("wallet128px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

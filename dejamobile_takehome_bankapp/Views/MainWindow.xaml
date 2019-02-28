@@ -98,25 +98,25 @@
                     <ListViewItem x:Name="listViewItemUser" Height="50"  Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" GotFocus="listViewItemUser_GotFocus" >
                         <StackPanel Orientation="Horizontal">
                             <Image  Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/users128px.png"/>
-                            <TextBlock Text="USER" Style="{StaticResource styleNavBarTextBlockMenu}"/>
+                            <TextBlock Text="User" Style="{StaticResource styleNavBarTextBlockMenu}"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="listViewItemCards"  Height="50" Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="Black" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" GotFocus="listViewItemCards_GotFocus" >
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Image x:Name="imageSettings"  Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/multipleCreditCard128px.png" />
-                            <TextBlock Text="CARDS"  Style="{StaticResource styleNavBarTextBlockMenu}"/>
+                            <Image x:Name="imageSettings"  Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/wallet128px.png" />
+                            <TextBlock Text="Wallet"  Style="{StaticResource styleNavBarTextBlockMenu}"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="listViewItemTest1"  Height="50"  Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" >
                         <StackPanel Orientation="Horizontal">
-                            <Image Style="{StaticResource styleNavBarIconMenu}" />
-                            <TextBlock x:Name="textBlockMenuTest1" Text="Test1" Style="{StaticResource styleNavBarTextBlockMenu}"/>
+                            <Image Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/payment128px.png" />
+                            <TextBlock x:Name="textBlockMenuPayments" Text="Pay" Style="{StaticResource styleNavBarTextBlockMenu}"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="listViewItemTest2"  Height="50" Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" >
                         <StackPanel Orientation="Horizontal">
-                            <Image  Style="{StaticResource styleNavBarIconMenu}" />
-                            <TextBlock x:Name="textBlockMenuTest2" Text="Test2" Style="{StaticResource styleNavBarTextBlockMenu}"/>
+                            <Image  Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/receipt128px.png" />
+                            <TextBlock x:Name="textBlockMenuStatistics" Text="Stats" Style="{StaticResource styleNavBarTextBlockMenu}"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

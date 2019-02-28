@@ -57,6 +57,7 @@
     <Compile Include="Service\ServiceManager.cs" />
     <Compile Include="Service\ServiceTemplate.cs" />
     <Compile Include="ViewModels\ViewCardsViewModel.cs" />
+    <Compile Include="ViewModels\ViewShoppingViewModel.cs" />
     <Compile Include="ViewModels\ViewSingleCardViewModel.cs" />
     <Compile Include="ViewModels\ViewToolBarViewModel.cs" />
     <Compile Include="ViewModels\ViewUserViewModel.cs" />
@@ -64,6 +65,9 @@
       <DependentUpon>ViewCards.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewList.cs" />
+    <Compile Include="Views\ViewShopping.xaml.cs">
+      <DependentUpon>ViewShopping.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewSingleCard.xaml.cs">
       <DependentUpon>ViewSingleCard.xaml</DependentUpon>
     </Compile>
@@ -87,6 +91,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ViewCards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewShopping.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,6 +190,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\refresh128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\payment128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\receipt128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\wallet128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\coffee128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\gpu128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\groceries128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\smartphone128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\cart128px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\buy128px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

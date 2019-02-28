@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="dejamobile_takehome_bankapp.Views.ViewShopping"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Border Background="#1E282C" Height="820" Width="400" CornerRadius="30" >
+        <StackPanel Margin="20">
+            <Image Width="128" Margin="30,30,30,10" Source="/dejamobile_takehome_bankapp;component/Icons/cart128px.png"/>
+            <Label Content="Let's go shopping !" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+            <Separator></Separator>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="70" />
+                </Grid.ColumnDefinitions>
+                <Image Source="/dejamobile_takehome_bankapp;component/Icons/groceries128px.png" Width="80"/>
+                <StackPanel Grid.Column="1">
+                    <Label Content="Groceries" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                    <Label Content="50€" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                    
+                </StackPanel>
+                <Button Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickBuy}" CommandParameter="groceries">
+                    <Image Source="/dejamobile_takehome_bankapp;component/Icons/buy128px.png"  />
+                </Button>
+            </Grid>
+            <Grid  Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="70" />
+                </Grid.ColumnDefinitions>
+                <Image Source="/dejamobile_takehome_bankapp;component/Icons/smartphone128px.png" Width="80"/>
+                <StackPanel Grid.Column="1">
+                    <Label Content="Samsang multi fold X" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                    <Label Content="2399€" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+
+                </StackPanel>
+                <Button Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickBuy}" CommandParameter="smartphone">
+                    <Image Source="/dejamobile_takehome_bankapp;component/Icons/buy128px.png"  />
+                </Button>
+            </Grid>
+            <Grid  Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="70" />
+                </Grid.ColumnDefinitions>
+                <Image Source="/dejamobile_takehome_bankapp;component/Icons/gpu128px.png" Width="80"/>
+                <StackPanel Grid.Column="1">
+                    <Label Content="RGBTX 4080Ti" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                    <Label Content="1999€" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                </StackPanel>
+                <Button Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickBuy}" CommandParameter="gpu">
+                    <Image Source="/dejamobile_takehome_bankapp;component/Icons/buy128px.png"  />
+                </Button>
+            </Grid>
+            <Grid  Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="70" />
+                </Grid.ColumnDefinitions>
+                <Image Source="/dejamobile_takehome_bankapp;component/Icons/coffee128px.png" Width="80"/>
+                <StackPanel Grid.Column="1">
+                    <Label Content="STARDUCKS frappe" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                    <Label Content="9€" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                </StackPanel>
+                <Button Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickBuy}" CommandParameter="coffee">
+                    <Image Source="/dejamobile_takehome_bankapp;component/Icons/buy128px.png"  />
+                </Button>
+            </Grid>
+
+        </StackPanel>
+    </Border>
+</UserControl>
