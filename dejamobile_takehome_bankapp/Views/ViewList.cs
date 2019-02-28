@@ -13,5 +13,6 @@ namespace dejamobile_takehome_bankapp.Views
         public static string userView = "ViewUser";
         public static string cardsView = "ViewCards";
         public static string shoppingView = "ViewShopping";
+        public static string historyView = "ViewHistory";
     }
 }

@@ -61,7 +61,7 @@
     <Compile Include="ViewModels\ViewCardsViewModel.cs" />
     <Compile Include="ViewModels\ViewShoppingViewModel.cs" />
     <Compile Include="ViewModels\ViewSingleCardViewModel.cs" />
-    <Compile Include="ViewModels\ViewStatisticsViewModel.cs" />
+    <Compile Include="ViewModels\ViewHistoryViewModel.cs" />
     <Compile Include="ViewModels\ViewToolBarViewModel.cs" />
     <Compile Include="ViewModels\ViewUserViewModel.cs" />
     <Compile Include="Views\ViewCards.xaml.cs">
@@ -74,8 +74,8 @@
     <Compile Include="Views\ViewSingleCard.xaml.cs">
       <DependentUpon>ViewSingleCard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewStatistics.xaml.cs">
-      <DependentUpon>ViewStatistics.xaml</DependentUpon>
+    <Compile Include="Views\ViewHistory.xaml.cs">
+      <DependentUpon>ViewHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewToolBar.xaml.cs">
       <DependentUpon>ViewToolBar.xaml</DependentUpon>
@@ -108,7 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ViewStatistics.xaml">
+    <Page Include="Views\ViewHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

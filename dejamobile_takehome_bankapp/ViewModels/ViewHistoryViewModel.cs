@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using dejamobile_takehome_sdk.Models;
 using dejamobile_takehome_sdk;
+using dejamobile_takehome_bankapp.Service.Mocks;
 
 namespace dejamobile_takehome_bankapp.ViewModels
 {
-    public class ViewStatisticsViewModel : BindableBase
+    public class ViewHistoryViewModel : BindableBase
     {
         private IEventAggregator _eventAggregator;
         public IEventAggregator eventAggregator
@@ -17,6 +18,29 @@ namespace dejamobile_takehome_bankapp.ViewModels
             get { return _eventAggregator; }
             set { _eventAggregator = value; }
         }
+
+        private string _currentAmountOfCashRemaining;
+        public string currentAmountOfCashRemaining
+        {
+            get { return _currentAmountOfCashRemaining; }
+            set { SetProperty(ref _currentAmountOfCashRemaining, value) ; }
+        }
+
+        private List<Transaction> _listOfTransaction;
+        public List<Transaction> listOfTransaction
+        {
+            get { return _listOfTransaction; }
+            set { SetProperty(ref _listOfTransaction, value); }
+        }
+
+        private List<string> _listOfDisplayableTransaction;
+        public List<string> listOfDisplayableTransaction
+        {
+            get { return _listOfDisplayableTransaction; }
+            set { SetProperty(ref _listOfDisplayableTransaction, value); }
+        }
+
+
 
         private List<string> _listOfAvaibleDisplayableCardNumber;
         public List<string> listOfAvaibleDisplayableCardNumber
@@ -37,10 +61,10 @@ namespace dejamobile_takehome_bankapp.ViewModels
         private Dictionary<string, CardModel> availableCardDictionnary;
         private List<CardModel> availableCards;
 
-        public ViewStatisticsViewModel(IEventAggregator eventAggregator)
+        public ViewHistoryViewModel(IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            onBtnClickGetReceipts = new DelegateCommand<string>(executeonBtnClickGetReceipts, canExecuteonBtnClickGetReceipts);
+            onBtnClickGetReceipts = new DelegateCommand<string>(executeonBtnClickGetReceipts, canExecuteonBtnClickGetReceipts).ObservesProperty(() => selectedDisplayableCardNumber);
 
             availableCardDictionnary = new Dictionary<string, dejamobile_takehome_sdk.Models.CardModel>();
             listOfAvaibleDisplayableCardNumber = new List<string>();
@@ -51,6 +75,26 @@ namespace dejamobile_takehome_bankapp.ViewModels
         private void initSubscriptions()
         {
             eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Subscribe(onSdkCommandResultEvents);
+            eventAggregator.GetEvent<Events.BankReceiptEvent>().Subscribe(onBankReceiptEvents);
+        }
+
+        private void onBankReceiptEvents(AccountDisplayableInfo obj)
+        {
+            currentAmountOfCashRemaining = obj.amounfOfCash.ToString() + "€";
+            listOfTransaction = obj.transactionHistory;
+            listOfDisplayableTransaction = buildDisplayableTransactionList(listOfTransaction);
+        }
+
+        private List<string> buildDisplayableTransactionList(List<Transaction> listOfTransaction)
+        {
+            List<string> list = new List<string>();
+
+            foreach (Transaction transaction in listOfTransaction)
+            {
+                list.Add(transaction.name + " - " + transaction.date + " - " + transaction.amount.ToString() + "€ (balance = " + transaction.remainingBalance + ")");
+            }
+
+            return list;
         }
 
         //duplicated code :( I should have made a cardManagement service where every card info is stored/process... if I had enough time

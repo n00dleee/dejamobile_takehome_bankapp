@@ -5,9 +5,9 @@ namespace dejamobile_takehome_bankapp.Views
     /// <summary>
     /// Interaction logic for ViewStatistics
     /// </summary>
-    public partial class ViewStatistics : UserControl
+    public partial class ViewHistory : UserControl
     {
-        public ViewStatistics()
+        public ViewHistory()
         {
             InitializeComponent();
         }

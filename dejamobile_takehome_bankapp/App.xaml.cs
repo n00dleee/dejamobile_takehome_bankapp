@@ -21,6 +21,8 @@ namespace dejamobile_takehome_bankapp
             containerRegistry.RegisterForNavigation<ViewUser>(ViewList.userView);
             containerRegistry.RegisterForNavigation<ViewCards>(ViewList.cardsView);
             containerRegistry.RegisterForNavigation<ViewShopping>(ViewList.shoppingView);
+            containerRegistry.RegisterForNavigation<ViewHistory>(ViewList.historyView);
+
         }
     }
 }

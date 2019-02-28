@@ -52,12 +52,6 @@ namespace dejamobile_takehome_bankapp.Views
             }
         }
 
-
-        private void printFormattedConsoleWriteLine(string s)
-        {
-            Console.WriteLine(DateTime.Now.ToString() + "UI/MainWindow.xaml -> " + s);
-        }
-
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             eventAggregator.GetEvent<Events.NavigateToEvent>().Publish(ViewList.userView);
@@ -73,9 +67,14 @@ namespace dejamobile_takehome_bankapp.Views
             eventAggregator.GetEvent<Events.NavigateToEvent>().Publish(ViewList.cardsView);
         }
 
-        private void listViewItemTest1_GotFocus(object sender, RoutedEventArgs e)
+        private void listViewItemShopping_GotFocus(object sender, RoutedEventArgs e)
         {
             eventAggregator.GetEvent<Events.NavigateToEvent>().Publish(ViewList.shoppingView);
+        }
+
+        private void listViewItemHistory_GotFocus(object sender, RoutedEventArgs e)
+        {
+            eventAggregator.GetEvent<Events.NavigateToEvent>().Publish(ViewList.historyView);
         }
     }
 }

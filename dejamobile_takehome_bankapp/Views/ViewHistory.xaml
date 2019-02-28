@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="dejamobile_takehome_bankapp.Views.ViewStatistics"
+﻿<UserControl x:Class="dejamobile_takehome_bankapp.Views.ViewHistory"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
@@ -16,13 +16,18 @@
                         <ColumnDefinition Width="50" />
                     </Grid.ColumnDefinitions>
                     <ComboBox Grid.Column="0" x:Name="comboBoxAvailableCard" ItemsSource="{Binding listOfAvaibleDisplayableCardNumber}" SelectedValue="{Binding selectedDisplayableCardNumber}" Margin="10"></ComboBox>
-                    <Button Grid.Column="1" Command="{Binding }" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    <Button Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickGetReceipts}">
                         <Image Source="/dejamobile_takehome_bankapp;component/Icons/checked128px.png" />
                     </Button>
                 </Grid>
             </StackPanel>
             <Separator></Separator>
-            <ListBox ItemsSource="{Binding listOfTransactions}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Current balance : " Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                <Label Content="{Binding currentAmountOfCashRemaining}" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+            </StackPanel>
+            <Separator></Separator>
+            <ListBox ItemsSource="{Binding listOfDisplayableTransaction}" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="400" Width="330" Margin="10">
                 
             </ListBox>
         </StackPanel>
