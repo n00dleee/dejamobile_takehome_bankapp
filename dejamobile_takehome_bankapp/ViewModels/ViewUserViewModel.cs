@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using dejamobile_takehome_sdk;
+using dejamobile_takehome_sdk.Models;
 
 namespace dejamobile_takehome_bankapp.ViewModels
 {
@@ -16,6 +17,18 @@ namespace dejamobile_takehome_bankapp.ViewModels
         {
             get { return _eventAggregator; }
             set { _eventAggregator = value; }
+        }
+
+        private dejamobile_takehome_sdk.Models.UserModel _currentUser;
+        public dejamobile_takehome_sdk.Models.UserModel currentUser
+        {
+            get { return _currentUser; }
+            set { _currentUser = value; onCurrentUserSet(value); }
+        }
+
+        private void onCurrentUserSet(UserModel value)
+        {
+            eventAggregator.GetEvent<Events.UserLoggedInEvent>().Publish(value);
         }
 
         //login
@@ -178,6 +191,13 @@ namespace dejamobile_takehome_bankapp.ViewModels
         private void initSubcriptions()
         {
             eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Subscribe(onSdkCommandResultEvents);
+            eventAggregator.GetEvent<Events.GetUserLoggedEvent>().Subscribe(onGetUserLoggedEvents);
+        }
+
+        private void onGetUserLoggedEvents()
+        {
+            if(currentUser != null)
+                eventAggregator.GetEvent<Events.UserLoggedInEvent>().Publish(currentUser);
         }
 
         private void onSdkCommandResultEvents(TaskResult obj)
@@ -205,6 +225,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     }  
                     else
                     {
+                        currentUser = null;
                         eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.error, "Login failed :("));
                         currentMode = mode.helper;
                     } 
@@ -228,6 +249,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
         {
             dejamobile_takehome_sdk.Models.UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userName, password);
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.login, user));
+            currentUser = user;
         }
 
         private void executeonBtnClickGoToUserCreation(string obj)

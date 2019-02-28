@@ -118,23 +118,29 @@ namespace dejamobile_takehome_bankapp.ViewModels
             eventAggregator.GetEvent<Events.NavigateToEvent>().Subscribe(onNavigateEvents);
             eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Subscribe(onSdkCommandResultEvents);
             eventAggregator.GetEvent<Events.MerchantOrderEvent>().Subscribe(onMerchantOrderEvents);
+            eventAggregator.GetEvent<Events.BankApprovalEvent>().Subscribe(onBankApprovalEvents);
         }
 
-        private void onMerchantOrderEvents(MerchantOrderArgs obj)
+        private void onBankApprovalEvents(BankTransactionArgs obj)
         {
             switch (obj.orderStatus)
             {
-                case MerchantOrderArgs.OrderStatus.approved:
+                case BankTransactionArgs.OrderStatus.approved:
                     //send info to user
                     eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new NotificationArgs(NotificationArgs.notificationTypeEnum.success, "Transaction has been successfully processed !"));
                     break;
-                case MerchantOrderArgs.OrderStatus.refused:
+                case BankTransactionArgs.OrderStatus.refused:
                     //send info to user
-                    eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new NotificationArgs(NotificationArgs.notificationTypeEnum.success, "Transaction refused :("));
+                    eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new NotificationArgs(NotificationArgs.notificationTypeEnum.error, "Transaction refused :("));
                     break;
                 default:
                     break;
             }
+        }
+
+        private void onMerchantOrderEvents(MerchantOrderArgs obj)
+        {
+           
         }
 
         private void onCardsRefresh()

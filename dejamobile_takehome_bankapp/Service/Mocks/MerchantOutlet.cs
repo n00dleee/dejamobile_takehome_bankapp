@@ -14,7 +14,6 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
         {
             this.eventAggregator = eventAggregator;
             itemsInShop = initItemsInShop();
-
         }
 
         public class itemInShop
@@ -38,9 +37,9 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
             return new List<itemInShop>()
             {
                 { new itemInShop(1, "groceries", 50) },
-                { new itemInShop(1, "gpu", 1999) },
-                { new itemInShop(1, "smartphone", 2399) },
-                { new itemInShop(1, "coffee", 9) }
+                { new itemInShop(2, "gpu", 1999) },
+                { new itemInShop(3, "smartphone", 2399) },
+                { new itemInShop(4, "coffee", 9) }
             };
         }
 
@@ -75,6 +74,14 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
             {
                 case MerchantOrderArgs.OrderStatus.pendingForApproval:
                     processOrder(obj);
+                    break;
+                case MerchantOrderArgs.OrderStatus.approved:
+                    obj.orderStatus = MerchantOrderArgs.OrderStatus.approved;
+                    eventAggregator.GetEvent<Events.MerchantOrderEvent>().Publish(obj);
+                    break;
+                case MerchantOrderArgs.OrderStatus.refused:
+                    obj.orderStatus = MerchantOrderArgs.OrderStatus.approved;
+                    eventAggregator.GetEvent<Events.MerchantOrderEvent>().Publish(obj);
                     break;
                 default:
                     break;

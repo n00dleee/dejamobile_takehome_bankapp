@@ -108,4 +108,22 @@ namespace dejamobile_takehome_bankapp.Events
             this.paymentInformation = card;
         }
     }
+
+    public class BankManagementArgs
+    {
+        public enum EventType { addDigitizedCard, removeDigitizedCard }
+
+        public EventType eventType;
+        public dejamobile_takehome_sdk.Models.UserModel userConcerned;
+        public dejamobile_takehome_sdk.Models.CardModel originalCard;
+        public dejamobile_takehome_sdk.Models.CardModel digitizedCard;
+
+        public BankManagementArgs(dejamobile_takehome_sdk.Models.UserModel userConcerned, dejamobile_takehome_sdk.Models.CardModel originalCard, dejamobile_takehome_sdk.Models.CardModel digitizedCard)
+        {
+            this.userConcerned = userConcerned;
+            this.originalCard = originalCard;
+            this.digitizedCard = digitizedCard;
+        }
+
+    }
 }

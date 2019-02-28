@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using dejamobile_takehome_sdk;
 using System.Windows;
+using dejamobile_takehome_sdk.Models;
 
 namespace dejamobile_takehome_bankapp.ViewModels
 {
@@ -18,7 +19,11 @@ namespace dejamobile_takehome_bankapp.ViewModels
             set { _eventAggregator = value; }
         }
 
+        dejamobile_takehome_sdk.Models.UserModel loggedUser;
+
         List<dejamobile_takehome_sdk.Models.CardModel> cardList { get; set; }
+
+        dejamobile_takehome_sdk.Models.CardModel currentOriginalCard { get; set; }
 
         public DelegateCommand<string> onBtnClickAddCard { get; set; }
         public DelegateCommand<string> onBtnClickValidateCardCreation { set; get; }
@@ -121,6 +126,9 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
             //refresh cards
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
+
+            //get logged user info
+            eventAggregator.GetEvent<Events.GetUserLoggedEvent>().Publish();
         }
 
         private bool canExecuteonBtnClickCardNumberAutoFill(string arg)
@@ -157,6 +165,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
         {
             dejamobile_takehome_sdk.Models.CardModel card = new dejamobile_takehome_sdk.Models.CardModel(cardCreationOwnerName, cardCreationCardNumber, cardCreationExpDate, cardCreationCrypto);
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.addCard, card));
+            currentOriginalCard = card;
         }
 
         private bool canExecuteonBtnClickAddCard(string arg)
@@ -173,8 +182,13 @@ namespace dejamobile_takehome_bankapp.ViewModels
         {
             eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Subscribe(onSdkCommandResultEvents);
             eventAggregator.GetEvent<Events.NavigateToEvent>().Subscribe(onNavigateEvents);
+            eventAggregator.GetEvent<Events.UserLoggedInEvent>().Subscribe(onUserLoggedInEvents);
         }
 
+        private void onUserLoggedInEvents(UserModel obj)
+        {
+            loggedUser = obj;
+        }
 
         private void onNavigateEvents(string obj)
         {
@@ -209,6 +223,9 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     {
                         eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.success, "Cards succesfully added !"));
                         currentMode = mode.display;
+
+                        //notify bank a digitized card has been added
+                        eventAggregator.GetEvent<Events.BankManagementEvent>().Publish(new Events.BankManagementArgs(loggedUser, currentOriginalCard, (dejamobile_takehome_sdk.Models.CardModel)obj.payload));
 
                         //refresh card list !
                         eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
