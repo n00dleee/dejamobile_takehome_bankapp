@@ -75,19 +75,19 @@ namespace dejamobile_takehome_bankapp.ViewModels
         {
             try
             {
-                Events.NotificationEventArgs notification = (Events.NotificationEventArgs)obj;
+                Events.NotificationArgs notification = (Events.NotificationArgs)obj;
                 switch (notification.type)
                 {
-                    case Events.NotificationEventArgs.notificationTypeEnum.information:
+                    case Events.NotificationArgs.notificationTypeEnum.information:
                         _notifier.ShowInformation(notification.info);
                         break;
-                    case Events.NotificationEventArgs.notificationTypeEnum.success:
+                    case Events.NotificationArgs.notificationTypeEnum.success:
                         _notifier.ShowSuccess(notification.info);
                         break;
-                    case Events.NotificationEventArgs.notificationTypeEnum.warning:
+                    case Events.NotificationArgs.notificationTypeEnum.warning:
                         _notifier.ShowWarning(notification.info);
                         break;
-                    case Events.NotificationEventArgs.notificationTypeEnum.error:
+                    case Events.NotificationArgs.notificationTypeEnum.error:
                         _notifier.ShowError(notification.info);
                         break;
                 }

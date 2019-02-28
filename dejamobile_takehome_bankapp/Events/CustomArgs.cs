@@ -42,7 +42,7 @@ namespace dejamobile_takehome_bankapp.Events
         }
     }
 
-    public class NotificationEventArgs
+    public class NotificationArgs
     {
         public notificationTypeEnum type { get; set; }
         public string info { get; set; }
@@ -55,24 +55,57 @@ namespace dejamobile_takehome_bankapp.Events
             unknown
         }
 
-        public NotificationEventArgs(notificationTypeEnum type, string info)
+        public NotificationArgs(notificationTypeEnum type, string info)
         {
             this.type = type;
             this.info = info;
         }
     }
 
-    public class SdkCommandRequestEventArgs
+    public class SdkCommandRequestArgs
     {
         public enum CommandType { createUser, login, addCard, getCards, deleteCard, getStats }
 
         public CommandType commandType { get; set; }
         public Object payload { get; set; }
         
-        public SdkCommandRequestEventArgs(CommandType commandType, Object payload = null)
+        public SdkCommandRequestArgs(CommandType commandType, Object payload = null)
         {
             this.commandType = commandType;
             this.payload = payload;
+        }
+    }
+
+    public class MerchantOrderArgs
+    {
+        public OrderStatus orderStatus;
+        public dejamobile_takehome_sdk.Models.CardModel paymentInformation;
+        public int itemPurchasedId;
+
+        public enum OrderStatus { pendingForApproval, approved, refused }
+
+        public MerchantOrderArgs(dejamobile_takehome_sdk.Models.CardModel card, int itemPurchasedId, OrderStatus orderStatus = OrderStatus.pendingForApproval)
+        {
+            this.itemPurchasedId = itemPurchasedId;
+            this.paymentInformation = card;
+            this.orderStatus = orderStatus;
+        }
+    }
+
+    public class BankTransactionArgs
+    {
+        public string orderName;
+        public OrderStatus orderStatus;
+        public dejamobile_takehome_sdk.Models.CardModel paymentInformation;
+        public int transactionAmount;
+
+        public enum OrderStatus { pendingForApproval, approved, refused }
+
+        public BankTransactionArgs(int transactionAmount, dejamobile_takehome_sdk.Models.CardModel card, string orderName)
+        {
+            this.transactionAmount = transactionAmount;
+            this.orderName = orderName;
+            this.paymentInformation = card;
         }
     }
 }

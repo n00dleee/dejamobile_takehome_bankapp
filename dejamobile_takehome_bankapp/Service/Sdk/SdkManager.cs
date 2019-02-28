@@ -24,30 +24,30 @@ namespace dejamobile_takehome_bankapp.Service.Sdk
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Subscribe(onSdkCommandRequestEvents);
         }
 
-        private async void onSdkCommandRequestEvents(SdkCommandRequestEventArgs arg)
+        private async void onSdkCommandRequestEvents(SdkCommandRequestArgs arg)
         {
             TaskResult taskResult;
             switch (arg.commandType)
             {
-                case SdkCommandRequestEventArgs.CommandType.createUser:
+                case SdkCommandRequestArgs.CommandType.createUser:
                     taskResult = await sdk.CreateUser((dejamobile_takehome_sdk.Models.UserModel)arg.payload);
                     eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
-                case SdkCommandRequestEventArgs.CommandType.login:
+                case SdkCommandRequestArgs.CommandType.login:
                     taskResult = await sdk.ConnectUser((dejamobile_takehome_sdk.Models.UserModel)arg.payload);
                     eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
-                case SdkCommandRequestEventArgs.CommandType.addCard:
+                case SdkCommandRequestArgs.CommandType.addCard:
                     taskResult = await sdk.AddCard((dejamobile_takehome_sdk.Models.CardModel)arg.payload);
                     eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
-                case SdkCommandRequestEventArgs.CommandType.getCards:
+                case SdkCommandRequestArgs.CommandType.getCards:
                     taskResult = sdk.getDigitizedCardsList();
                     eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
-                case SdkCommandRequestEventArgs.CommandType.deleteCard:
+                case SdkCommandRequestArgs.CommandType.deleteCard:
                     break;
-                case SdkCommandRequestEventArgs.CommandType.getStats:
+                case SdkCommandRequestArgs.CommandType.getStats:
                     break;
                 default:
                     break;

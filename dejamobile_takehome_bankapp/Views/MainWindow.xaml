@@ -107,7 +107,7 @@
                             <TextBlock Text="Wallet"  Style="{StaticResource styleNavBarTextBlockMenu}"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="listViewItemTest1"  Height="50"  Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" >
+                    <ListViewItem x:Name="listViewItemTest1"  Height="50"  Background="#1E282C" Controls:ItemHelper.ActiveSelectionBackgroundBrush="#1E282C" Controls:ItemHelper.HoverSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.DisabledSelectedBackgroundBrush="#1E282C" Controls:ItemHelper.SelectedBackgroundBrush="#1E282C" Controls:ItemHelper.HoverBackgroundBrush="#FF1E282C" GotFocus="listViewItemTest1_GotFocus" >
                         <StackPanel Orientation="Horizontal">
                             <Image Style="{StaticResource styleNavBarIconMenu}" Source="/dejamobile_takehome_bankapp;component/Icons/payment128px.png" />
                             <TextBlock x:Name="textBlockMenuPayments" Text="Pay" Style="{StaticResource styleNavBarTextBlockMenu}"/>

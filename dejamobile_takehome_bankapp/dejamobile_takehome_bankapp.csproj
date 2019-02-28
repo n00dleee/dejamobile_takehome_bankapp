@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\Logs\LogManager.cs" />
+    <Compile Include="Service\Mocks\MerchantOutlet.cs" />
     <Compile Include="Service\Sdk\SdkManager.cs" />
     <Compile Include="Service\ServiceManager.cs" />
     <Compile Include="Service\ServiceTemplate.cs" />

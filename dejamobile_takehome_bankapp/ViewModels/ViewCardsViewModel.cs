@@ -120,7 +120,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
             onBtnClickCardNumberAutoFill = new DelegateCommand<string>(executeonBtnClickCardNumberAutoFill, canExecuteonBtnClickCardNumberAutoFill);
 
             //refresh cards
-            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.getCards));
+            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
         }
 
         private bool canExecuteonBtnClickCardNumberAutoFill(string arg)
@@ -156,7 +156,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
         private void executeonBtnClickValidateCardCreation(string obj)
         {
             dejamobile_takehome_sdk.Models.CardModel card = new dejamobile_takehome_sdk.Models.CardModel(cardCreationOwnerName, cardCreationCardNumber, cardCreationExpDate, cardCreationCrypto);
-            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.addCard, card));
+            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.addCard, card));
         }
 
         private bool canExecuteonBtnClickAddCard(string arg)
@@ -181,7 +181,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
             switch (obj)
             {
                 case "ViewCards": // cannot switch on Views.ViewList.cardsView as it is not considered constant. Cannot set this as const AND static at the same time :(
-                    eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.getCards));
+                    eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
                     break;
                 default:
                     break;
@@ -195,23 +195,23 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 case TaskResult.TaskName.getCards:
                     if (obj.result)
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "Cards refreshed !"));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.success, "Cards refreshed !"));
                         cardList = (List<dejamobile_takehome_sdk.Models.CardModel>)obj.payload;
                     }
                     else
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "Cards refresh failed :("));
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.warning, "Please ensure to be logged in !"));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.error, "Cards refresh failed :("));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.warning, "Please ensure to be logged in !"));
                     }                    
                     break;
                 case TaskResult.TaskName.addCard:
                     if (obj.result)
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "Cards succesfully added !"));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.success, "Cards succesfully added !"));
                         currentMode = mode.display;
 
                         //refresh card list !
-                        eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.getCards));
+                        eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
                     }
                     break;
                 default:

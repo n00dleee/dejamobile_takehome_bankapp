@@ -22,12 +22,13 @@ namespace dejamobile_takehome_bankapp.Service
         {
             LogManager,
             SdkManager,
-
+            MerchantOutlet,
         }
 
         //services
         private Logs.LogManager logManager { get; set; }
         private Sdk.SdkManager sdkManager { get; set; }
+        private Mocks.MerchantOutlet merchantOutlet { get; set; }
 
         public ServiceManager(IEventAggregator eventAggregator)
         {
@@ -111,6 +112,11 @@ namespace dejamobile_takehome_bankapp.Service
                     sdkManager.start();
                     eventAggregator.GetEvent<Events.ServiceManagementEvent>().Publish(new ServiceManagementArg(ServiceManagementArg.Type.status, ServicesEnum.SdkManager, null, true));
                     break;
+                case ServicesEnum.MerchantOutlet:
+                    merchantOutlet = new Mocks.MerchantOutlet(eventAggregator);
+                    merchantOutlet.start();
+                    eventAggregator.GetEvent<Events.ServiceManagementEvent>().Publish(new ServiceManagementArg(ServiceManagementArg.Type.status, ServicesEnum.MerchantOutlet, null, true));
+                    break;
 
                 default:
                     break;
@@ -122,6 +128,7 @@ namespace dejamobile_takehome_bankapp.Service
             //services to be started at boot
             startThisService(new ServiceManagementArg(ServiceManagementArg.Type.start, ServicesEnum.LogManager, null));
             startThisService(new ServiceManagementArg(ServiceManagementArg.Type.start, ServicesEnum.SdkManager, null));
+            startThisService(new ServiceManagementArg(ServiceManagementArg.Type.start, ServicesEnum.MerchantOutlet, null));
         }
     }
 }

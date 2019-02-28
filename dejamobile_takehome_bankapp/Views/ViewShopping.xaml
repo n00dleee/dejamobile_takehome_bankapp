@@ -8,6 +8,11 @@
             <Image Width="128" Margin="30,30,30,10" Source="/dejamobile_takehome_bankapp;component/Icons/cart128px.png"/>
             <Label Content="Let's go shopping !" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
             <Separator></Separator>
+            <StackPanel>
+                <Label Content="Please select a card to use" Foreground="White" HorizontalAlignment="Center" FontSize="19"/>
+                <ComboBox x:Name="comboBoxAvailableCard" ItemsSource="{Binding listOfAvaibleDisplayableCardNumber}" SelectedValue="{Binding selectedDisplayableCardNumber}" Margin="10"></ComboBox>
+            </StackPanel>
+            <Separator></Separator>
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />

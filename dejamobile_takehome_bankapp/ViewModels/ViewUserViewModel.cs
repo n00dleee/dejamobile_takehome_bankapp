@@ -172,7 +172,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
         private void executeonBtnClickUserCreation(string obj)
         {
             dejamobile_takehome_sdk.Models.UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userCreationUserName, userCreationPassword, userCreationFirstName, userCreationLastName, userCreationPhone);
-            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.createUser, user));
+            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.createUser, user));
         }
 
         private void initSubcriptions()
@@ -187,12 +187,12 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 case TaskResult.TaskName.createUser:
                     if(obj.result)
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "User successfully created !"));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.success, "User successfully created !"));
                         currentMode = mode.login;
                     }
                     else
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "User creation failed :("));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.error, "User creation failed :("));
                         currentMode = mode.creation;
                     }
                     
@@ -200,12 +200,12 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 case TaskResult.TaskName.logUser:
                     if (obj.result)
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.success, "Login success !"));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.success, "Login success !"));
                         currentMode = mode.loggedIn;
                     }  
                     else
                     {
-                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationEventArgs(Events.NotificationEventArgs.notificationTypeEnum.error, "Login failed :("));
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.error, "Login failed :("));
                         currentMode = mode.helper;
                     } 
                     break;
@@ -227,7 +227,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
         private void executeonBtnClickLogin(string obj)
         {
             dejamobile_takehome_sdk.Models.UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userName, password);
-            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestEventArgs(Events.SdkCommandRequestEventArgs.CommandType.login, user));
+            eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.login, user));
         }
 
         private void executeonBtnClickGoToUserCreation(string obj)
