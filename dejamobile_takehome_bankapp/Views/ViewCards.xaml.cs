@@ -56,6 +56,8 @@ namespace dejamobile_takehome_bankapp.Views
         private void updateCards(List<dejamobile_takehome_sdk.Models.CardModel> cards)
         {
             uiCardList.Clear();
+            listBoxCardsDisplay.Items.Clear();
+
             foreach (dejamobile_takehome_sdk.Models.CardModel card in cards)
             {
                 ViewSingleCard newCard = new Views.ViewSingleCard(card);
