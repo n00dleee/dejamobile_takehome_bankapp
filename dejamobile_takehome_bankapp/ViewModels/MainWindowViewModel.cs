@@ -58,11 +58,11 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     parentWindow: Application.Current.MainWindow,
                     corner: Corner.BottomRight,
                     offsetX: 25,
-                    offsetY: 75);
+                    offsetY: 25);
 
                 cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
                     notificationLifetime: TimeSpan.FromSeconds(2),
-                    maximumNotificationCount: MaximumNotificationCount.FromCount(8));
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(6));
 
                 cfg.Dispatcher = Application.Current.Dispatcher;
 
