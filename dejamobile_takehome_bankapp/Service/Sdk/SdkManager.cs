@@ -26,33 +26,39 @@ namespace dejamobile_takehome_bankapp.Service.Sdk
 
         private async void onSdkCommandRequestEvents(SdkCommandRequestArgs arg)
         {
-            TaskResult taskResult;
-            switch (arg.commandType)
+            try
             {
-                case SdkCommandRequestArgs.CommandType.createUser:
-                    taskResult = await sdk.CreateUser((dejamobile_takehome_sdk.Models.UserModel)arg.payload);
-                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
-                    break;
-                case SdkCommandRequestArgs.CommandType.login:
-                    taskResult = await sdk.ConnectUser((dejamobile_takehome_sdk.Models.UserModel)arg.payload);
-                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
-                    break;
-                case SdkCommandRequestArgs.CommandType.addCard:
-                    taskResult = await sdk.AddCard((dejamobile_takehome_sdk.Models.CardModel)arg.payload);
-                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
-                    break;
-                case SdkCommandRequestArgs.CommandType.getCards:
-                    taskResult = sdk.getDigitizedCardsList();
-                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
-                    break;
-                case SdkCommandRequestArgs.CommandType.deleteCard:
-                    taskResult = sdk.deleteDigitizedCard((string)arg.payload);
-                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
-                    break;
-                case SdkCommandRequestArgs.CommandType.getStats:
-                    break;
-                default:
-                    break;
+                TaskResult taskResult;
+                switch (arg.commandType)
+                {
+                    case SdkCommandRequestArgs.CommandType.createUser:
+                        taskResult = await sdk.CreateUser((dejamobile_takehome_sdk.Models.UserModel)arg.payload);
+                        eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
+                        break;
+                    case SdkCommandRequestArgs.CommandType.login:
+                        taskResult = await sdk.ConnectUser((dejamobile_takehome_sdk.Models.UserModel)arg.payload);
+                        eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
+                        break;
+                    case SdkCommandRequestArgs.CommandType.addCard:
+                        taskResult = await sdk.AddCard((dejamobile_takehome_sdk.Models.CardModel)arg.payload);
+                        eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
+                        break;
+                    case SdkCommandRequestArgs.CommandType.getCards:
+                        taskResult = sdk.getDigitizedCardsList();
+                        eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
+                        break;
+                    case SdkCommandRequestArgs.CommandType.deleteCard:
+                        taskResult = sdk.deleteDigitizedCard((string)arg.payload);
+                        eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
+                        break;
+                    case SdkCommandRequestArgs.CommandType.getStats:
+                        break;
+                    default:
+                        break;
+                }
+            }catch
+            {
+                eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new NotificationArgs(NotificationArgs.notificationTypeEnum.error, "Unexpected error in SDK manager service... be sure backend is running and reachable"));
             }
         }
 
