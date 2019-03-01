@@ -182,7 +182,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
             onBtnClickLogin = new DelegateCommand<string>(executeonBtnClickLogin, canExecuteonBtnClickLogin).ObservesProperty(() => userName).ObservesProperty(() => password);
             onBtnClickGoToUserCreation = new DelegateCommand<string>(executeonBtnClickGoToUserCreation, canExecuteonBtnClickGoToUserCreation);
             onBtnClickGoBackToLogin = new DelegateCommand<string>(executeonBtnClickGoBackToLogin, canExecuteonBtnClickGoBackToLogin);
-            onBtnClickUserCreation = new DelegateCommand<string>(executeonBtnClickUserCreation, canExecuteonBtnClickUserCreation).ObservesProperty(() => userCreationPassword).ObservesProperty(() => password);
+            onBtnClickUserCreation = new DelegateCommand<string>(executeonBtnClickUserCreation, canExecuteonBtnClickUserCreation).ObservesProperty(() => userCreationPassword).ObservesProperty(() => userCreationUserName);
             onBtnGoToUserCreationPage = new DelegateCommand<string>(executeonBtnGoToUserCreationPage, canExecuteonBtnGoToUserCreationPage);
         }
 
@@ -198,7 +198,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private bool canExecuteonBtnClickUserCreation(string arg)
         {
-            if (userCreationUserName.Count() > 0 && password.Count() > 7 && userCreationFirstName.Count() > 0  && userCreationLastName.Count() > 0) //password should be at least 8 chars
+            if (userCreationUserName.Count() > 0 && userCreationPassword.Count() > 7 && userCreationFirstName.Count() > 0  && userCreationLastName.Count() > 0) //password should be at least 8 chars
             {
                 return true;
             }
