@@ -122,16 +122,28 @@ namespace dejamobile_takehome_bankapp.ViewModels
             {
                 case mode.display:
                 default:
+                    flushContent();
                     stackPanelCardsDisplayVisibility = Visibility.Visible;
                     stackPanelCardCreationVisibility = Visibility.Collapsed;
                     stackPanelAddCardButtonVisibility = Visibility.Visible;
                     break;
                 case mode.creation:
+                    flushContent();
                     stackPanelCardsDisplayVisibility = Visibility.Collapsed;
                     stackPanelCardCreationVisibility = Visibility.Visible;
                     stackPanelAddCardButtonVisibility = Visibility.Collapsed;
                     break;
             }
+        }
+
+        private void flushContent()
+        {
+            cardCreationCardNumber = "";
+            cardCreationCrypto = "";
+            cardCreationExpDate = "";
+            cardCreationExpDateMonth = "";
+            cardCreationExpDateYear = "";
+            cardCreationOwnerName = "";
         }
 
         public ViewCardsViewModel(IEventAggregator eventAggregator)

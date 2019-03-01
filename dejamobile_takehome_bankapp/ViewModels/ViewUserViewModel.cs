@@ -111,7 +111,16 @@ namespace dejamobile_takehome_bankapp.ViewModels
             set { SetProperty(ref _stackPanelLoggedUserVisibility, value); }
         }
 
-        
+        private void flushContent()
+        {
+            userCreationPhone = "";
+            userCreationLastName = "";
+            userCreationFirstName = "";
+            userCreationPassword = "";
+            userCreationUserName = "";
+            userName = "";
+            password = "";
+        }
 
         private mode _currentMode;
         public mode currentMode
@@ -126,18 +135,21 @@ namespace dejamobile_takehome_bankapp.ViewModels
             {
                 case mode.login:
                 default:
+                    flushContent();
                     stackPanelLoginVisibility = Visibility.Visible;
                     stackPanelUserCreationVisibility = Visibility.Collapsed;
                     stackPanelUserHelperVisibility = Visibility.Collapsed;
                     stackPanelLoggedUserVisibility = Visibility.Collapsed;
                     break;
                 case mode.creation:
+                    flushContent();
                     stackPanelLoginVisibility = Visibility.Collapsed;
                     stackPanelUserHelperVisibility = Visibility.Collapsed;
                     stackPanelUserCreationVisibility = Visibility.Visible;
                     stackPanelLoggedUserVisibility = Visibility.Collapsed;
                     break;
                 case mode.helper:
+                    flushContent();
                     stackPanelLoginVisibility = Visibility.Collapsed;
                     stackPanelUserHelperVisibility = Visibility.Visible;
                     stackPanelUserCreationVisibility = Visibility.Collapsed;
