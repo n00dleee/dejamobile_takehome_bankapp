@@ -159,6 +159,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
         public DelegateCommand<string> onBtnClickGoToUserCreation { get; set; }
         public DelegateCommand<string> onBtnClickGoBackToLogin { get; set; }
         public DelegateCommand<string> onBtnClickUserCreation { get; set; }
+        public DelegateCommand<string> onBtnGoToUserCreationPage { get; set; }
 
         public ViewUserViewModel(IEventAggregator eventAggregator)
         {
@@ -169,10 +170,21 @@ namespace dejamobile_takehome_bankapp.ViewModels
             onBtnClickLogin = new DelegateCommand<string>(executeonBtnClickLogin, canExecuteonBtnClickLogin).ObservesProperty(() => userName).ObservesProperty(() => password);
             onBtnClickGoToUserCreation = new DelegateCommand<string>(executeonBtnClickGoToUserCreation, canExecuteonBtnClickGoToUserCreation);
             onBtnClickGoBackToLogin = new DelegateCommand<string>(executeonBtnClickGoBackToLogin, canExecuteonBtnClickGoBackToLogin);
-            onBtnClickUserCreation = new DelegateCommand<string>(executeonBtnClickUserCreation, canexecuteonBtnClickUserCreation).ObservesProperty(() => userCreationPassword).ObservesProperty(() => password);
+            onBtnClickUserCreation = new DelegateCommand<string>(executeonBtnClickUserCreation, canExecuteonBtnClickUserCreation).ObservesProperty(() => userCreationPassword).ObservesProperty(() => password);
+            onBtnGoToUserCreationPage = new DelegateCommand<string>(executeonBtnGoToUserCreationPage, canExecuteonBtnGoToUserCreationPage);
         }
 
-        private bool canexecuteonBtnClickUserCreation(string arg)
+        private bool canExecuteonBtnGoToUserCreationPage(string arg)
+        {
+            return true;
+        }
+
+        private void executeonBtnGoToUserCreationPage(string obj)
+        {
+            currentMode = mode.creation;
+        }
+
+        private bool canExecuteonBtnClickUserCreation(string arg)
         {
             if (userCreationUserName.Count() > 0 && password.Count() > 7 && userCreationFirstName.Count() > 0  && userCreationLastName.Count() > 0) //password should be at least 8 chars
             {
