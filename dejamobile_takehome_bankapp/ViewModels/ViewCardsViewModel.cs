@@ -230,6 +230,13 @@ namespace dejamobile_takehome_bankapp.ViewModels
                         //refresh card list !
                         eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
                     }
+                    else
+                    {
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.error, "Digitized card generation failed :("));
+
+                        currentMode = mode.display;
+                    }
+
                     break;
                 default:
                     break;
