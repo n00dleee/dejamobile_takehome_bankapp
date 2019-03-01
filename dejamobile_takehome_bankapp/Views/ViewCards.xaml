@@ -35,9 +35,14 @@
                 
 
                 <Label Content="Expiration date" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding cardCreationExpDate}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox Text="{Binding cardCreationExpDateMonth}" Width="50"/>
+                    <Label Content="/" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                    <TextBox Text="{Binding cardCreationExpDateYear}" Width="50"/>
+                </StackPanel>
+                
                 <Label Content="CVV" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding cardCreationCrypto}"/>
+                <TextBox Text="{Binding cardCreationCrypto}" HorizontalAlignment="Center" Width="75"/>
                 <StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Center">
                     <Button Background="{x:Null}" Command="{Binding onBtnClickValidateCardCreation}" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="100">
                         <Image Source="/dejamobile_takehome_bankapp;component/Icons/checked128px.png" Width="40" />

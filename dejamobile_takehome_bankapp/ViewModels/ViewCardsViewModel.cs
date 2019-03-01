@@ -53,6 +53,28 @@ namespace dejamobile_takehome_bankapp.ViewModels
             set { SetProperty(ref _cardCreationExpDate, value); }
         }
 
+        private string _cardCreationExpDateMonth;
+        public string cardCreationExpDateMonth
+        {
+            get { return _cardCreationExpDateMonth; }
+            set { SetProperty(ref _cardCreationExpDateMonth, value); updateExpDate(); }
+        }
+
+        private string _cardCreationExpDateYear;
+        public string cardCreationExpDateYear
+        {
+            get { return _cardCreationExpDateYear; }
+            set { SetProperty(ref _cardCreationExpDateYear, value); updateExpDate(); }
+        }
+
+        private void updateExpDate()
+        {
+            if(cardCreationExpDateMonth.Count() == 2 && cardCreationExpDateYear.Count() == 2)
+            {
+                cardCreationExpDate = cardCreationExpDateMonth + "/" + cardCreationExpDateYear;
+            }
+        }
+
         private string _cardCreationCrypto = "";
         public string cardCreationCrypto
         {
