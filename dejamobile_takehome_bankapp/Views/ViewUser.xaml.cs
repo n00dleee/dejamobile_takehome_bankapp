@@ -11,5 +11,10 @@ namespace dejamobile_takehome_bankapp.Views
         {
             InitializeComponent();
         }
+
+        private void passwordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
+        {
+            trickyHiddenTextbox.Text = ((PasswordBox)sender).Password;
+        }
     }
 }

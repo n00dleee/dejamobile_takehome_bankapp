@@ -20,14 +20,14 @@
 
             <StackPanel x:Name="stackPanelCardCreation" Visibility="{Binding stackPanelCardCreationVisibility}">
                 <Label Content="Owner name" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox x:Name="onwerName" Text="{Binding cardCreationOwnerName}" />
+                <TextBox x:Name="onwerName" Text="{Binding cardCreationOwnerName,UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Card number" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="30" />
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="cardNumber" Grid.Column="0" Text="{Binding cardCreationCardNumber}" Margin="0,0,10,0" />
+                    <TextBox x:Name="cardNumber" Grid.Column="0" Text="{Binding cardCreationCardNumber,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0" />
                     <Button Grid.Column="1" Background="White" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickCardNumberAutoFill}" >
                         <Image Source="/dejamobile_takehome_bankapp;component/Icons/magicWand128px.png" />
                     </Button>
@@ -36,13 +36,13 @@
 
                 <Label Content="Expiration date" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox Text="{Binding cardCreationExpDateMonth}" Width="50"  x:Name="expDateMonth"  />
+                    <TextBox Text="{Binding cardCreationExpDateMonth,UpdateSourceTrigger=PropertyChanged}" Width="50"  x:Name="expDateMonth"  />
                     <Label Content="/" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                    <TextBox Text="{Binding cardCreationExpDateYear}" Width="50" x:Name="expDateYear" />
+                    <TextBox Text="{Binding cardCreationExpDateYear,UpdateSourceTrigger=PropertyChanged}" Width="50" x:Name="expDateYear" />
                 </StackPanel>
                 
                 <Label Content="CVV" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding cardCreationCrypto}" HorizontalAlignment="Center" Width="75" x:Name="cvv" />
+                <TextBox Text="{Binding cardCreationCrypto,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="75" x:Name="cvv" />
                 <StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Center">
                     <Button Background="{x:Null}" Command="{Binding onBtnClickValidateCardCreation}" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="100">
                         <Image Source="/dejamobile_takehome_bankapp;component/Icons/checked128px.png" Width="50" />

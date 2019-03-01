@@ -14,10 +14,11 @@
                     
                 </Separator>
                 <Label Content="Username" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding userName}"/>
+                <TextBox Text="{Binding userName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Password" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding password}" />
-                <Button Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding onBtnClickLogin}" CommandParameter="decode" Width="100">
+                <PasswordBox x:Name="passwordBox" PasswordChanged="passwordBox_PasswordChanged" />
+                <TextBox x:Name="trickyHiddenTextbox" Text="{Binding password, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"/>
+                <Button Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding onBtnClickLogin}" Width="100">
                     <Image Source="/dejamobile_takehome_bankapp;component/Icons/checked128px.png" Width="50"/>
                 </Button>
                 <Separator>
@@ -45,15 +46,15 @@
                 <Label Content="User creation" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
                 <Separator></Separator>
                 <Label Content="Username" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding userCreationUserName}"/>
+                <TextBox Text="{Binding userCreationUserName,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="First name" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding userCreationFirstName }" />
+                <TextBox Text="{Binding userCreationFirstName ,UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Last name" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding userCreationLastName}" />
+                <TextBox Text="{Binding userCreationLastName,UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Phone" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding userCreationPhone}" />
+                <TextBox Text="{Binding userCreationPhone,UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Password" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBox Text="{Binding userCreationPassword}" />
+                <TextBox Text="{Binding userCreationPassword,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding onBtnClickUserCreation}" CommandParameter="decode" Width="100">
                     <Image Source="/dejamobile_takehome_bankapp;component/Icons/checked128px.png" Width="50"/>

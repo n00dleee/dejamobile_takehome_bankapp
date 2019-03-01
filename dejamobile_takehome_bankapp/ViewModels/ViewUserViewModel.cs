@@ -208,7 +208,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private void executeonBtnClickUserCreation(string obj)
         {
-            dejamobile_takehome_sdk.Models.UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userCreationUserName, userCreationPassword, userCreationFirstName, userCreationLastName, userCreationPhone);
+            UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userCreationUserName, userCreationPassword, userCreationFirstName, userCreationLastName, userCreationPhone);
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.createUser, user));
         }
 
@@ -271,7 +271,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private void executeonBtnClickLogin(string obj)
         {
-            dejamobile_takehome_sdk.Models.UserModel user = new dejamobile_takehome_sdk.Models.UserModel(userName, password);
+            UserModel user = new UserModel(userName, password);
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.login, user));
             currentUser = user;
         }

@@ -69,10 +69,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private void updateExpDate()
         {
-            if(cardCreationExpDateMonth.Count() == 2 && cardCreationExpDateYear.Count() == 2)
-            {
-                cardCreationExpDate = cardCreationExpDateMonth + "/" + cardCreationExpDateYear;
-            }
+            cardCreationExpDate = cardCreationExpDateMonth + "/" + cardCreationExpDateYear;
         }
 
         private string _cardCreationCrypto = "";
@@ -209,7 +206,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private bool canExecuteonBtnClickValidateCardCreation(string arg)
         {
-            if (cardCreationOwnerName.Count() > 0 && cardCreationCardNumber.Count() == 16 && cardCreationExpDate.Count() == 5 && cardCreationCrypto.Count() == 3)
+            if (cardCreationOwnerName.Count() > 0 && cardCreationCardNumber.Count() == 16 && cardCreationExpDate.Count() == 5 && cardCreationCrypto.Count() == 3 && cardCreationExpDate.Contains('/') && cardCreationExpDate.Substring(2,1) == "/")
             {
                 return true;
             }
