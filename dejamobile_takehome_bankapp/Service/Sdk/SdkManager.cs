@@ -46,6 +46,8 @@ namespace dejamobile_takehome_bankapp.Service.Sdk
                     eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
                 case SdkCommandRequestArgs.CommandType.deleteCard:
+                    taskResult = sdk.deleteDigitizedCard((string)arg.payload);
+                    eventAggregator.GetEvent<Events.SdkCommandResultEvent>().Publish(taskResult);
                     break;
                 case SdkCommandRequestArgs.CommandType.getStats:
                     break;

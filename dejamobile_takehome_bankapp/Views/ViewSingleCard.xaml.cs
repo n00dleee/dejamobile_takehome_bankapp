@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using dejamobile_takehome_sdk.Models;
 
 namespace dejamobile_takehome_bankapp.Views
 {
@@ -8,9 +9,12 @@ namespace dejamobile_takehome_bankapp.Views
     /// </summary>
     public partial class ViewSingleCard : UserControl
     {
-        public ViewSingleCard(dejamobile_takehome_sdk.Models.CardModel card)
+        public CardModel card { get; set; }
+
+        public ViewSingleCard(CardModel card)
         {
             InitializeComponent();
+            this.card = card;
             ownerName.Content = card.ownerName;
             cardNumber.Content = reformatCardNumber(card.cardNumber);
             expDate.Content = card.expirationDate;

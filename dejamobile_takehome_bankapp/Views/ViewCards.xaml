@@ -60,7 +60,7 @@
                         </Style>
                     </ListBox.Resources>
                 </ListBox>
-                <Button Margin="20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickDeleteCard}">
+                <Button Margin="20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Command="{Binding onBtnClickDeleteCard}" CommandParameter="{Binding SelectedValue, ElementName=listBoxCardsDisplay}" >
                     <Image Source="/dejamobile_takehome_bankapp;component/Icons/delete128px.png" Width="50"/>
                 </Button>
             </StackPanel>

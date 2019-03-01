@@ -7,6 +7,7 @@ using System.Linq;
 using dejamobile_takehome_sdk;
 using System.Windows;
 using dejamobile_takehome_sdk.Models;
+using dejamobile_takehome_bankapp.Views;
 
 namespace dejamobile_takehome_bankapp.ViewModels
 {
@@ -19,15 +20,16 @@ namespace dejamobile_takehome_bankapp.ViewModels
             set { _eventAggregator = value; }
         }
 
-        dejamobile_takehome_sdk.Models.UserModel loggedUser;
+        UserModel loggedUser;
 
-        List<dejamobile_takehome_sdk.Models.CardModel> cardList { get; set; }
+        List<CardModel> cardList { get; set; }
 
-        dejamobile_takehome_sdk.Models.CardModel currentOriginalCard { get; set; }
+        CardModel currentOriginalCard { get; set; }
 
         public DelegateCommand<string> onBtnClickAddCard { get; set; }
         public DelegateCommand<string> onBtnClickValidateCardCreation { set; get; }
         public DelegateCommand<string> onBtnClickCancelCardCreation { set; get; }
+        public DelegateCommand<ViewSingleCard> onBtnClickDeleteCard { set; get; }
         public DelegateCommand<string> onBtnClickCardNumberAutoFill { get; set; }
 
         private string _cardCreationOwnerName= "";
@@ -123,12 +125,31 @@ namespace dejamobile_takehome_bankapp.ViewModels
                 ObservesProperty(() => cardCreationCrypto);
             onBtnClickCancelCardCreation = new DelegateCommand<string>(executeonBtnClickCancelCardCreation, canExecuteonBtnClickCancelCardCreation);
             onBtnClickCardNumberAutoFill = new DelegateCommand<string>(executeonBtnClickCardNumberAutoFill, canExecuteonBtnClickCardNumberAutoFill);
+            onBtnClickDeleteCard = new DelegateCommand<ViewSingleCard>(executeonBtnClickDeleteCard, canExecuteonBtnClickDeleteCard);
 
             //refresh cards
             eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
 
             //get logged user info
             eventAggregator.GetEvent<Events.GetUserLoggedEvent>().Publish();
+        }
+
+        private bool canExecuteonBtnClickDeleteCard(ViewSingleCard arg)
+        {
+            return true;
+        }
+
+        private void executeonBtnClickDeleteCard(ViewSingleCard obj)
+        {
+            if (obj == null)
+            {
+                eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.warning, "Please select a card to delete"));
+            }
+            else
+            {
+                eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.information, "Card deletion pending..."));
+                eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.deleteCard, obj.card.uid));
+            }
         }
 
         private bool canExecuteonBtnClickCardNumberAutoFill(string arg)
@@ -138,6 +159,7 @@ namespace dejamobile_takehome_bankapp.ViewModels
 
         private void executeonBtnClickCardNumberAutoFill(string obj)
         {
+            //VISA valid card number example
             cardCreationCardNumber = "4556848510974654";
         }
 
@@ -202,6 +224,16 @@ namespace dejamobile_takehome_bankapp.ViewModels
             }
         }
 
+        private CardModel getCardFromId(string s)
+        {
+            foreach(CardModel card in cardList)
+            {
+                if (card.uid == s)
+                    return card;
+            }
+            return null;
+        }
+
         private void onSdkCommandResultEvents(TaskResult obj)
         {
             switch (obj.name)
@@ -238,9 +270,30 @@ namespace dejamobile_takehome_bankapp.ViewModels
                     }
 
                     break;
+                case TaskResult.TaskName.removeCard:
+                    if (obj.result)
+                    {
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.success, "Cards succesfully removed !"));
+                        currentMode = mode.display;
+
+                        //notify bank a digitized card has been added
+                         eventAggregator.GetEvent<Events.BankManagementEvent>().Publish(new Events.BankManagementArgs(Events.BankManagementArgs.EventType.removeDigitizedCard, loggedUser, null, null, (string)obj.payload));
+
+                        //refresh card list !
+                        eventAggregator.GetEvent<Events.SdkCommandRequestEvent>().Publish(new Events.SdkCommandRequestArgs(Events.SdkCommandRequestArgs.CommandType.getCards));
+                    }
+                    else
+                    {
+                        eventAggregator.GetEvent<Events.NotificationEvent>().Publish(new Events.NotificationArgs(Events.NotificationArgs.notificationTypeEnum.error, "Digitized card generation failed :("));
+
+                        currentMode = mode.display;
+                    }
+                    break;
                 default:
                     break;
             }
+
+
         }
     }
 }

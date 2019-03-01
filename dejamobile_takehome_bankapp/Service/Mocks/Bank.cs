@@ -50,7 +50,7 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
                     break;
                 case BankManagementArgs.EventType.removeDigitizedCard:
                     //remove account
-                    deleteDigitizedCardFromAccount(obj.digitizedCard);
+                    deleteAccountLinkedToThisVirtualCard(obj.idToManage);
                     break;
                 case BankManagementArgs.EventType.getHistory:
                     eventAggregator.GetEvent<Events.BankReceiptEvent>().Publish(getAccountInfoForThisCard(obj.digitizedCard));
@@ -72,15 +72,25 @@ namespace dejamobile_takehome_bankapp.Service.Mocks
             return null;
         }
 
-        private void deleteDigitizedCardFromAccount(CardModel digitizedCard)
+        private bool deleteAccountLinkedToThisVirtualCard(string id)
         {
+            BankAccount accountToRemove = null;
+
             foreach(BankAccount account in accounts)
             {
-                if(account.paymentInformation.digitizedCardCopy == digitizedCard)
+                if(account.paymentInformation.digitizedCardCopy.uid == id)
                 {
-                    account.paymentInformation.digitizedCardCopy = null;
+                    accountToRemove = account;
                 }
             }
+
+            if (accountToRemove != null)
+            {
+                accounts.Remove(accountToRemove);
+                return true;
+            }
+            else
+                return false;
         }
 
         private void onBankTransactionEvents(BankTransactionArgs obj)

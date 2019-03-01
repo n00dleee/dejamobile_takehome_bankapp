@@ -117,13 +117,15 @@ namespace dejamobile_takehome_bankapp.Events
         public dejamobile_takehome_sdk.Models.UserModel userConcerned;
         public dejamobile_takehome_sdk.Models.CardModel originalCard;
         public dejamobile_takehome_sdk.Models.CardModel digitizedCard;
+        public string idToManage;
 
-        public BankManagementArgs(EventType eventType ,dejamobile_takehome_sdk.Models.UserModel user, dejamobile_takehome_sdk.Models.CardModel digitizedCard, dejamobile_takehome_sdk.Models.CardModel originalCard = null)
+        public BankManagementArgs(EventType eventType ,dejamobile_takehome_sdk.Models.UserModel user, dejamobile_takehome_sdk.Models.CardModel digitizedCard, dejamobile_takehome_sdk.Models.CardModel originalCard = null, string idToManage = "")
         {
             this.eventType = eventType;
             this.userConcerned = user;
             this.originalCard = originalCard;
             this.digitizedCard = digitizedCard;
+            this.idToManage = idToManage;
         }
 
     }
